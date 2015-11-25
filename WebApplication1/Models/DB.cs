@@ -9,33 +9,30 @@ namespace WebApplication1.Models
 {
     public static class DB
     {
-        //static SQLiteConnection db;
+        private static readonly string connectionString;
+        private static readonly string connectionStringReadOnly;
 
-        //static DB()
-        //{
-        //    var cs = getConnectionString();
-        //    db = new SQLiteConnection(cs);
-        //}
-
-        public static SQLiteConnection getDb()
+        static DB()
         {
-            var cs = getConnectionString();
-            return new SQLiteConnection(cs);
+            //connectionString = getConnectionString(false);
+            //connectionStringReadOnly = getConnectionString(true);
+            connectionString = "Data Source=c:/test/test.sqlite;Version=3;";
+            connectionStringReadOnly = "Data Source=c:/test/test.sqlite;Version=3;Read Only=True;";
         }
 
-        private static string getConnectionString()
+        public static SQLiteConnection getDb(bool isReadOnly)
+        {
+            return isReadOnly ? new SQLiteConnection(connectionStringReadOnly) : new SQLiteConnection(connectionString);
+        }
+
+        private static string getConnectionString(bool isReadOnly)
         {
             string relativePath = @"App_Data\test.sqlite";
-            string currentPath;
-            string absolutePath;
-            string connectionString;
-
-            currentPath = AppDomain.CurrentDomain.BaseDirectory;
-            absolutePath = Path.Combine(currentPath, relativePath);
-
-            connectionString = string.Format("DataSource={0};Version=3;", absolutePath);
-            connectionString = connectionString.Replace("\\", "/");
-            return connectionString;
+            var currentPath = AppDomain.CurrentDomain.BaseDirectory;
+            var absolutePath = Path.Combine(currentPath, relativePath);
+            var connString = string.Format(isReadOnly ? "DataSource={0};Version=3;Read Only=True;" : "DataSource={0};Version=3;", absolutePath);
+            connString = connString.Replace("\\", "/");
+            return connString;
         }
     }
 }

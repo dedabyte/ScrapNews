@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var db = DB.getDb();
+                var db = DB.getDb(true);
                 db.Open();
 
                 SQLiteCommand c = new SQLiteCommand(q, db);
