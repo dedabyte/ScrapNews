@@ -52,6 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Db.cs" />
+    <Compile Include="Model\Helpers.cs" />
+    <Compile Include="Model\PageModel.cs" />
+    <Compile Include="Model\RssModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
