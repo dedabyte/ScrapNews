@@ -134,6 +134,21 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\app\app.js" />
+    <Content Include="scripts\app\dbq.js" />
+    <Content Include="scripts\app\events\events-service.js" />
+    <Content Include="scripts\app\events\log-service.js" />
+    <Content Include="scripts\app\filters\articles-directive.js" />
+    <Content Include="scripts\app\filters\filters-directive.js" />
+    <Content Include="scripts\app\server\server-service.js" />
+    <Content Include="scripts\lib\angular-animate.min.js" />
+    <Content Include="scripts\lib\angular-touch.min.js" />
+    <Content Include="scripts\lib\angular-ui-router.min.js" />
+    <Content Include="scripts\lib\angular.min.js" />
+    <Content Include="scripts\lib\jquery.min.js" />
+    <Content Include="scripts\lib\lodash.min.js" />
+    <Content Include="scripts\lib\restangular.min.js" />
+    <Content Include="style\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,0 +1,84 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html, body, .app-wrapper {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-family: "Ubuntu", Arial, sans-serif !important;
+    color: #555555;    
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+.app-column {
+    float: left;
+    height: 100%;
+    border-right: 1px solid #dfdfdf;
+}
+
+.filters-column {
+    width: 180px;
+}
+.filters-column-top {
+    overflow: auto;
+    height: 50px;
+}
+.filters-column-bottom {
+    overflow: auto;
+    height: calc(100% - 50px);
+    border-top: 1px solid #dfdfdf;
+}
+.filter-checkbox {
+    font-size: 12px;
+    padding: 2px 3px;
+}
+.filter-checkbox input {
+    vertical-align: middle;
+}
+
+.articles-column {
+    width: 400px;
+    overflow: auto;
+}
+
+.article-short {
+    position: relative;
+    padding: 5px;
+    border-bottom: 1px solid #dfdfdf;
+    min-height: 100px;
+    overflow: auto;
+}
+.article-short-image {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    height: 90px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.article-short-data {
+    margin-left: 100px;
+}
+.article-short-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 2px;
+}
+.article-short-summary {
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+.article-short-meta {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.article-short-meta span {
+    font-weight: bold;
+}

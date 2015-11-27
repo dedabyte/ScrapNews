@@ -1,8 +1,23 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<div class="app-column filters-column" sn-filters>
+    <div class="filters-column-top">
+        <div class="filter-checkbox" ng-repeat="filter in snFilters.publishers">
+            <label><input type="checkbox" ng-model="filter._selected" ng-change="snFilters.filtersChanged()"/> <span ng-bind="filter.name"></span> (<small ng-bind="filter.hits"></small>)</label>
+        </div>
+    </div>
+    <div class="filters-column-bottom">
+        <div class="filter-checkbox" ng-repeat="filter in snFilters.categories">
+            <label><input type="checkbox" ng-model="filter._selected" ng-change="snFilters.filtersChanged()" /> <span ng-bind="filter.name"></span> (<small ng-bind="filter.hits"></small>)</label>
+        </div>
+    </div>
+</div>
 
-<div>
-    <input type="text" value="" />
-    <button>send</button>
+<div class="app-column articles-column" sn-articles>
+    <div class="article-short" ng-repeat="article in snArticles.articles | limitTo: 50">
+        <div class="article-short-image" style="background-image: url({{:: article.image_rss_original_url || article.image_original_url}})"></div>
+        <div class="article-short-data">
+            <p class="article-short-title" ng-bind=":: article.title"></p>
+            <p class="article-short-summary" ng-bind=":: article.summary"></p>
+            <p class="article-short-meta"><span ng-bind=":: article.publisher"></span> | <span ng-bind=":: article.category"></span></p>
+        </div>
+    </div>
 </div>

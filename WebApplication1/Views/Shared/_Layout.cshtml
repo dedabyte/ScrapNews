@@ -1,47 +1,30 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <style>
-        input {
-            width: 600px;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>News</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="~/style/style.css" rel="stylesheet" type="text/css">
+
+    <script src="~/scripts/lib/lodash.min.js"></script>
+    <script src="~/scripts/lib/jquery.min.js"></script>
+    <script src="~/scripts/lib/angular.min.js"></script>
+    <script src="~/scripts/lib/angular-animate.min.js"></script>
+    <script src="~/scripts/lib/restangular.min.js"></script>
 </head>
-<body>
-    <div class="container body-content">
+<body ng-app="app">
+    <div class="app-wrapper">
         @RenderBody()
     </div>
-
-    <script>
-        $('button').click(send);
-        $('input').keyup(function (e){
-            if(e.which === 13){
-                send();
-            }
-        });
-        
-        function log(response){
-            console.log(response);
-        }
-
-        function send() {
-            var val = $('input').val().trim();
-            if(!val){
-                return;
-            }
-            $.ajax({
-                type: 'GET',
-                url: '/q/',
-                data: { q: val },
-                success: log,
-                error: log
-            });
-        }
-    </script>
-
+    
+    <script src="~/scripts/app/dbq.js"></script>  
+    <script src="~/scripts/app/app.js"></script>  
+    <script src="~/scripts/app/server/server-service.js"></script>
+    <script src="~/scripts/app/events/log-service.js"></script>
+    <script src="~/scripts/app/events/events-service.js"></script>
+    <script src="~/scripts/app/filters/filters-directive.js"></script>
+    <script src="~/scripts/app/filters/articles-directive.js"></script>
 </body>
 </html>
