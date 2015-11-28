@@ -17,29 +17,34 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public JsonNetResult Query(string q)
+        public JsonNetResult Query(string q, int take = 100)
         {
             try
             {
-                var db = DB.getDb(true);
-                db.Open();
-
-                var command = new SQLiteCommand(q, db);
-                var reader = command.ExecuteReader();
-
                 var responseData = new List<dynamic>();
-                var columns = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
-                while (reader.Read())
+                using (var connection = Db.getConnection())
                 {
-                    var map = new ExpandoObject() as IDictionary<string, Object>;
-                    foreach (var column in columns)
+                    connection.Open();
+                    using (var cmd = new SQLiteCommand(q, connection))
                     {
-                        map.Add(column, reader[column]);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            var columns = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                            var index = 0;
+                            while (reader.Read() && index < take)
+                            {
+                                var map = new ExpandoObject() as IDictionary<string, Object>;
+                                foreach (var column in columns)
+                                {
+                                    map.Add(column, reader[column]);
+                                }
+                                responseData.Add(map);
+                                index++;
+                            }
+                        }
                     }
-                    responseData.Add(map);
                 }
 
-                db.Close();
                 return new JsonNetResult { Data = responseData };
             }
             catch (Exception e)

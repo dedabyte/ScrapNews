@@ -135,10 +135,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="scripts\app\app.js" />
+    <Content Include="scripts\app\article\article-preview-directive.js" />
     <Content Include="scripts\app\dbq.js" />
     <Content Include="scripts\app\events\events-service.js" />
     <Content Include="scripts\app\events\log-service.js" />
-    <Content Include="scripts\app\filters\articles-directive.js" />
+    <Content Include="scripts\app\article\articles-directive.js" />
     <Content Include="scripts\app\filters\filters-directive.js" />
     <Content Include="scripts\app\server\server-service.js" />
     <Content Include="scripts\lib\angular-animate.min.js" />
@@ -169,6 +170,7 @@
     <Content Include="packages.config" />
     <Content Include="App_Data\test.sqlite" />
     <None Include="Project_Readme.html" />
+    <Content Include="style\style.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

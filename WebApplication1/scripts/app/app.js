@@ -8,13 +8,8 @@
         RestangularProvider.setBaseUrl('/');
     });
 
-    app.run(function (Restangular, ServerService) {
-        ServerService.q(dbq.articles(['kurir'], ['stars', 'planeta'])).then(
-            function (response) {
-                console.log(response.plain());
-            }, function (response) {
-                console.log(response);
-            });
+    app.run(function () {
+
     });
 
 })();

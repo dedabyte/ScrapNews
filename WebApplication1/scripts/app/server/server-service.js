@@ -4,12 +4,12 @@
 
     angular
         .module('app')
-        .service('ServerService', ServerService);
+        .service('Server', Server);
 
-    function ServerService(Restangular) {
-        this.q = function (query) {
-            return Restangular.one('q').get({ q: query });
-        }
+    function Server(Restangular) {
+        this.q = function(query){
+            return Restangular.one('query').get({ q: query });
+        };
     }
 
 })();

@@ -58,7 +58,15 @@ namespace ConsoleApplication1
                           "'" + rssModel.RssImage + "'," +
                           ts + ")";
 
-                Db.ExecuteNonQuery(sql);
+                //Db.ExecuteNonQuery(sql);
+                using (var conn = Db.getConnection())
+                {
+                    conn.Open();
+                    using (var cmd = new SQLiteCommand(sql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
 
                 Console.WriteLine("OK   - " + rssModel.Link);
             }
@@ -146,18 +154,21 @@ namespace ConsoleApplication1
 
             try
             {
-                var connection = Db.getConnection();
-                connection.Open();
-
                 var sql = "select original_url from articles where publisher == '" + publisher + "'";
-                var command = new SQLiteCommand(sql, connection);
-                var reader = command.ExecuteReader();
-                while (reader.Read())
+                using (var connection = Db.getConnection())
                 {
-                    links.Add((string)reader["original_url"]);
+                    connection.Open();
+                    using (var cmd = new SQLiteCommand(sql, connection))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                links.Add((string)reader["original_url"]);
+                            }
+                        }
+                    }
                 }
-
-                connection.Close();    
             }
             catch (Exception e)
             {

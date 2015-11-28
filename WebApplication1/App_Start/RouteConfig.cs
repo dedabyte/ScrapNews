@@ -15,8 +15,8 @@ namespace WebApplication1
 
             routes.MapRoute(
                 name: "Query",
-                url: "q/{q}",
-                defaults: new { controller = "Home", action = "Query", q = UrlParameter.Optional }
+                url: "query/",
+                defaults: new { controller = "Home", action = "Query" }
             );
 
             routes.MapRoute(

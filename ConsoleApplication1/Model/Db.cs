@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.IO;
+﻿using System.Data.SQLite;
 
 namespace ConsoleApplication1.Model
 {
@@ -23,23 +20,14 @@ namespace ConsoleApplication1.Model
             return isReadOnly ? new SQLiteConnection(connectionStringReadOnly) : new SQLiteConnection(connectionString);
         }
 
-        public static void ExecuteNonQuery(string sql)
-        {
-            var connection = getConnection();
-            connection.Open();
-            var command = new SQLiteCommand(sql, connection);
-            command.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        private static string getConnectionString(bool isReadOnly)
-        {
-            string relativePath = @"App_Data\test.sqlite";
-            var currentPath = AppDomain.CurrentDomain.BaseDirectory;
-            var absolutePath = Path.Combine(currentPath, relativePath);
-            var connString = string.Format(isReadOnly ? "DataSource={0};Version=3;Read Only=True;" : "DataSource={0};Version=3;", absolutePath);
-            connString = connString.Replace("\\", "/");
-            return connString;
-        }
+        //private static string getConnectionString(bool isReadOnly)
+        //{
+        //    string relativePath = @"App_Data\test.sqlite";
+        //    var currentPath = AppDomain.CurrentDomain.BaseDirectory;
+        //    var absolutePath = Path.Combine(currentPath, relativePath);
+        //    var connString = string.Format(isReadOnly ? "DataSource={0};Version=3;Read Only=True;" : "DataSource={0};Version=3;", absolutePath);
+        //    connString = connString.Replace("\\", "/");
+        //    return connString;
+        //}
     }
 }

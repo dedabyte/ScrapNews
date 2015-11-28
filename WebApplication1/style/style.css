@@ -1,84 +1,126 @@
 ﻿* {
-    box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 html, body, .app-wrapper {
-    position: relative;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-    font-family: "Ubuntu", Arial, sans-serif !important;
-    color: #555555;    
-}
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-family: "Ubuntu", Arial, sans-serif !important;
+  color: #444444; }
 
 p, h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
+  margin: 0; }
 
 .app-column {
-    float: left;
-    height: 100%;
-    border-right: 1px solid #dfdfdf;
-}
+  float: left;
+  height: 100%;
+  border-right: 1px solid #dfdfdf;
+  overflow: auto; }
+
+.empty-column {
+  height: 100%;
+  width: 100%;
+  display: table; }
+  .empty-column div {
+    display: table-cell;
+    text-align: center;
+    color: #777777;
+    vertical-align: middle; }
 
 .filters-column {
-    width: 180px;
-}
-.filters-column-top {
-    overflow: auto;
-    height: 50px;
-}
-.filters-column-bottom {
-    overflow: auto;
-    height: calc(100% - 50px);
-    border-top: 1px solid #dfdfdf;
-}
-.filter-checkbox {
-    font-size: 12px;
-    padding: 2px 3px;
-}
-.filter-checkbox input {
-    vertical-align: middle;
-}
+  width: 180px; }
+
+.filters-column-group {
+  padding: 0 0 20px; }
+
+.filters-column-group-title {
+  text-transform: uppercase;
+  background-color: #777777;
+  color: white;
+  font-weight: bold;
+  padding: 6px 5px;
+  margin-bottom: 3px; }
+
+.filter-item {
+  cursor: pointer;
+  padding: 3px 5px; }
+  .filter-item:hover {
+    background-color: #fff1e5;
+    color: #ff7700; }
+  .filter-item.selected {
+    background-color: #ff7700;
+    color: white; }
 
 .articles-column {
-    width: 400px;
-    overflow: auto;
-}
+  width: 380px; }
 
 .article-short {
-    position: relative;
-    padding: 5px;
-    border-bottom: 1px solid #dfdfdf;
-    min-height: 100px;
-    overflow: auto;
-}
-.article-short-image {
+  cursor: pointer;
+  position: relative;
+  padding: 5px;
+  border-bottom: 1px solid #dfdfdf;
+  min-height: 100px;
+  overflow: auto; }
+  .article-short .article-short-image {
     position: absolute;
     top: 5px;
     left: 5px;
     width: 90px;
     height: 90px;
     background-repeat: no-repeat;
-    background-size: cover;
-}
-.article-short-data {
-    margin-left: 100px;
-}
-.article-short-title {
+    background-size: contain;
+    background-position: center; }
+  .article-short .article-short-data {
+    margin-left: 100px; }
+  .article-short .article-short-title {
+    font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
-    margin-top: 2px;
-}
-.article-short-summary {
+    margin-top: 2px; }
+  .article-short .article-short-summary {
+    font-size: 12px;
+    margin-bottom: 8px; }
+  .article-short .article-short-meta {
     font-size: 11px;
-    margin-bottom: 8px;
-}
-.article-short-meta {
-    font-size: 10px;
+    text-transform: uppercase; }
+  .article-short:hover {
+    background-color: #fff1e5; }
+    .article-short:hover .article-short-title {
+      color: #ff7700; }
+  .article-short.selected {
+    background-color: #ff7700;
+    color: white; }
+    .article-short.selected .article-short-title {
+      color: white; }
+
+.preview-column {
+  position: relative;
+  padding: 10px;
+  width: 500px; }
+  .preview-column .m-bot {
+    margin-bottom: 15px; }
+  .preview-column .preview-column-meta {
+    font-size: 11px;
     text-transform: uppercase;
-}
-.article-short-meta span {
-    font-weight: bold;
-}
+    color: #777777;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 10px; }
+    .preview-column .preview-column-meta a, .preview-column .preview-column-meta a:visited {
+      text-decortion: underline;
+      color: #777777; }
+    .preview-column .preview-column-meta a:hover {
+      color: #ff7700; }
+  .preview-column .preview-column-title {
+    font-size: 17px;
+    font-weight: bold; }
+  .preview-column .preview-column-summary {
+    text-align: justify;
+    font-size: 14px; }
+  .preview-column .preview-column-image img {
+    max-width: 100%; }
+  .preview-column .preview-column-content {
+    text-align: justify; }
+    .preview-column .preview-column-content p {
+      margin: 8px 0; }
