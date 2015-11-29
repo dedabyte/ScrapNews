@@ -17,10 +17,10 @@
 
                   function getFiltersFromServer() {
                       Server.q(dbq.allPublishers()).then(function (response) {
-                          self.publishers = response.plain();
+                          self.publishers = response.data;
                       });
                       Server.q(dbq.allCategories()).then(function (response) {
-                          self.categories = response.plain();
+                          self.categories = response.data;
                       });
                   }
 

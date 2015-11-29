@@ -16,7 +16,7 @@
 
                   function getArticlesFromServer(publishers, categories) {
                       Server.q(dbq.articles(publishers, categories)).then(function (response) {
-                          self.articles = response.plain();
+                          self.articles = response.data;
                       });
                   }
                   

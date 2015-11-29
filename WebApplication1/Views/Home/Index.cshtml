@@ -33,13 +33,19 @@
             <a href="{{snPreview.article.original_url}}" target="_blank"><b>source</b></a> | <b ng-bind="snPreview.article.publisher"></b> | <b ng-bind="snPreview.article.category"></b> | <b ng-bind="snPreview.timestampToReadable(snPreview.article.timestamp)"></b>
         </div>
         <div class="preview-column-title m-bot" ng-bind="snPreview.article.title"></div>
-        <div class="preview-column-summary m-bot" ng-bind="snPreview.article.summary"></div>
-        <div class="preview-column-image m-bot">
-            <img ng-src="{{snPreview.article.image_original_url || snPreview.article.image_rss_original_url || ''}}" alt="" />
+        <div class="preview-column-content m-bot" id="_content">
+            <p><b ng-bind="snPreview.article.summary"></b></p>
+            <p><img id="_featuredImage" ng-src="{{snPreview.article.image_original_url || snPreview.article.image_rss_original_url || ''}}" alt="" /></p>
+            <p ng-bind-html="snPreview.article.contentHtml"></p>
         </div>
-        <div class="preview-column-content m-bot" ng-bind-html="snPreview.article.contentHtml"></div>
     </div>
     <div class="empty-column" ng-hide="snPreview.article !== null">
         <div>Select an article to see preview</div>
+    </div>
+</div>
+
+<div class="app-column right-column">
+    <div sn-wp-post>
+        <button ng-click="snWpPost.post()" ng-disabled="snWpPost.article === null">post to wordpress</button>
     </div>
 </div>

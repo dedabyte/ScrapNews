@@ -6,7 +6,7 @@
 
     angular
       .module('app')
-      .directive(componentName, function (Server, EventsService, $sce) {
+      .directive(componentName, function (EventsService, $sce) {
           return {
               controllerAs: componentName,
               controller: function ($scope) {

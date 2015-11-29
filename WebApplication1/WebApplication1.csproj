@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\JsonNetResult.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,7 @@
     <Content Include="scripts\app\article\articles-directive.js" />
     <Content Include="scripts\app\filters\filters-directive.js" />
     <Content Include="scripts\app\server\server-service.js" />
+    <Content Include="scripts\app\wordpress\wordpress-directive.js" />
     <Content Include="scripts\lib\angular-animate.min.js" />
     <Content Include="scripts\lib\angular-touch.min.js" />
     <Content Include="scripts\lib\angular-ui-router.min.js" />
@@ -150,6 +152,9 @@
     <Content Include="scripts\lib\lodash.min.js" />
     <Content Include="scripts\lib\restangular.min.js" />
     <Content Include="style\style.css" />
+    <Content Include="style\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -165,10 +170,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\images\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="App_Data\test.sqlite" />
     <None Include="Project_Readme.html" />
     <Content Include="style\style.scss" />
   </ItemGroup>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using System.Dynamic;
@@ -45,12 +48,21 @@ namespace WebApplication1.Controllers
                     }
                 }
 
-                return new JsonNetResult { Data = responseData };
+                return new JsonNetResult { Data = new Response { data = responseData } };
             }
             catch (Exception e)
             {
-                return new JsonNetResult { Data = new { Error = true, Message = e.Message } };
+                return new JsonNetResult { Data = new Response { error = true, message = e.Message } };
             }
+        }
+
+        public ActionResult GetImage(string url)
+        {
+            var fileName = Path.GetFileName(url);
+            var folderPath = HostingEnvironment.MapPath("~/App_Data/images/" + fileName);
+            var webClient = new WebClient();
+            webClient.DownloadFile(url, folderPath);
+            return File(folderPath, "image/jpeg"); ;
         }
 
     }
