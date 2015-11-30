@@ -58,11 +58,13 @@ namespace WebApplication1.Controllers
 
         public ActionResult GetImage(string url)
         {
-            var fileName = Path.GetFileName(url);
-            var folderPath = HostingEnvironment.MapPath("~/App_Data/images/" + fileName);
+            //var fileName = Path.GetFileName(url);
+            //var folderPath = HostingEnvironment.MapPath("~/App_Data/images/" + fileName);
+            //webClient.DownloadFile(url, folderPath);
+
             var webClient = new WebClient();
-            webClient.DownloadFile(url, folderPath);
-            return File(folderPath, "image/jpeg"); ;
+            var data = webClient.DownloadData(url);
+            return File(data, "image/jpeg"); ;
         }
 
     }
