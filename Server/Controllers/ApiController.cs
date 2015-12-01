@@ -62,6 +62,7 @@ namespace Server.Controllers
             return File(data, "image/jpeg"); ;
         }
 
+        [HttpPost]
         public JsonNetResult Login(string user, string pass)
         {
             var userId = Auth.CheckCredentials(user, pass);
@@ -69,12 +70,18 @@ namespace Server.Controllers
             {
                 return new JsonNetResult { Data = new Response { error = true, message = "Invalid credentials." } };
             }
-            var loginSuccessful = Auth.Login(Response, userId, 1);
+            var loginSuccessful = Auth.Login(Response, userId, 30);
             if(!loginSuccessful)
             {
                 return new JsonNetResult { Data = new Response { error = true, message = "Login crashed :(" } };
             }
-            return new JsonNetResult { Data = new Response { message = "Welcome :)" } };
+            return new JsonNetResult { Data = new Response { data = Auth.UserProfile(userId), message = "Welcome :)" } };
+        }
+
+        [AuthAjaxFilter]
+        public JsonNetResult UserProfile()
+        {
+            return new JsonNetResult { Data = new Response { data = Auth.UserProfile(UserId) } };
         }
     }
 }
