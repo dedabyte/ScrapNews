@@ -7,13 +7,14 @@ namespace Scrapper.Model
     {
         public string TitleSelector { get; set; }
         public string SummarySelector { get; set; }
-        public string ContentSelector { get; set; }
         public string CategorySelector { get; set; }
         public string ImageOriginalUrlSelector { get; set; }
+        
+        public string ArticleNodeSelector { get; set; }
+        public string ArticleContentSelector { get; set; }
+        public string ArticleRemoveSelector { get; set; }
 
-        public string RemoveSelector { get; set; }
         public string SkipSelector { get; set; }
-
         public Regex SkipUrlRegex { get; set; }
         
         public string ImagePrefix { get; set; }
@@ -24,12 +25,16 @@ namespace Scrapper.Model
         {
             TitleSelector = "null";
             SummarySelector = "null";
-            ContentSelector = "null";
             CategorySelector = "null";
             ImageOriginalUrlSelector = "null";
-            RemoveSelector = "null";
+
+            ArticleNodeSelector = "null";
+            ArticleContentSelector = "null";
+            ArticleRemoveSelector = "null";
+            
             SkipSelector = "null";
             SkipUrlRegex = null;
+            
             ImagePrefix = "";
             Publisher = "unknown";
             Rss = new List<string>();

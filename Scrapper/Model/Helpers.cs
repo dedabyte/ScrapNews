@@ -13,7 +13,7 @@ namespace Scrapper.Model
 
         public static string Safe(this string str)
         {
-            return str.Trim().Replace("'", "");
+            return string.IsNullOrEmpty(str) ? "" : str.Trim().Replace("'", "");
         }
     }
 }

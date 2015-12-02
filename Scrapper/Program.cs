@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.IO;
 using System.Linq;
-using System.Net.Mime;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 using AngleSharp;
 using AngleSharp.Parser.Html;
-using AngleSharp.Services.Default;
 using Scrapper.Model;
 
 namespace Scrapper
@@ -31,20 +26,57 @@ namespace Scrapper
                     return;
                 }
 
+                // find nodes for text
                 var jqTitle = document.QuerySelectorAll(pageModel.TitleSelector);
                 var jqSummary = document.QuerySelectorAll(pageModel.SummarySelector);
-                var jqContent = document.QuerySelectorAll(pageModel.ContentSelector);
                 var jqCategory = document.QuerySelectorAll(pageModel.CategorySelector);
                 var jqImageOriginalUrl = document.QuerySelectorAll(pageModel.ImageOriginalUrlSelector);
-
+                
+                // populate text vars
                 var publisher = pageModel.Publisher;
                 var category = jqCategory.Any() ? jqCategory[0].TextContent.Safe().ToLower() : "";
                 var title = jqTitle[0].TextContent.Safe();
                 var summary = jqSummary.Any() ? jqSummary[0].TextContent.Safe() : "";
-                var content = string.Join(" ", jqContent.Select(m => m.OuterHtml.Safe()));
                 var imageOriginalUrl = jqImageOriginalUrl.Any() ? pageModel.ImagePrefix + jqImageOriginalUrl[0].GetAttribute("src").Safe() : "";
-                var ts = Helpers.Timestamp();
+                
+                // find nodes for html, remove junk
+                var jqContent = document.QuerySelector(pageModel.ArticleNodeSelector);
+                jqContent.QuerySelectorAll(pageModel.ArticleRemoveSelector).ToList().ForEach(x => x.Remove());
+                // remove scripts
+                var allowedScripts = new []
+                {
+                    "platform.instagram.com",
+                    "platform.twitter.com"
+                };
+                foreach (var script in jqContent.QuerySelectorAll("script").ToList())
+                {
+                    var src = script.GetAttribute("src").Safe();
+                    if ( !src.Any() || (src.Any() && !allowedScripts.Any(x => src.Contains(x))) )
+                    {
+                        Console.WriteLine("     - Script blocked: " + src);
+                        script.Remove();
+                    }
+                }
 
+                // mod images
+                foreach (var element in jqContent.QuerySelectorAll("img").ToList())
+                {
+                    // remove dimensions 
+                    element.RemoveAttribute("width");
+                    element.RemoveAttribute("height");
+                    // prefix sources
+                    var src = element.GetAttribute("src").Safe();
+                    if(src.Any() && !src.StartsWith("http"))
+                    {
+                        src = pageModel.ImagePrefix + src;
+                        element.SetAttribute("src", src);
+                    }
+                }
+
+                var content = jqContent.InnerHtml.Safe();
+
+                var ts = Helpers.Timestamp();
+                
                 var sql = "insert into articles " +
                           "(original_url,publisher,category,title,summary,content,image_original_url,image_rss_original_url,timestamp) " +
                           "values " +
@@ -239,8 +271,9 @@ namespace Scrapper
                     CategorySelector = "article.item-page .category a, article .article-header small a",
                     TitleSelector = "article.item-page .article-header h1",
                     SummarySelector = "article.item-page .article-header p",
-                    ContentSelector = "article.item-page > p, article h2.subtitle",
                     ImageOriginalUrlSelector = "article.item-page .article-header img",
+                    ArticleNodeSelector = "article.item-page",
+                    ArticleRemoveSelector = ".article-header,table,.related,.banner-inText,.banners-middle,.article-footer,.content-exchange",
                     ImagePrefix = "http://www.b92.net",
                     SkipSelector = "article.item-page.video",
                     SkipUrlRegex = new Regex("/video/", RegexOptions.IgnoreCase),
@@ -255,8 +288,9 @@ namespace Scrapper
                     CategorySelector = "article.detailView .detailViewHeader .category",
                     TitleSelector = "article.detailView .detailViewHeader h1.title",
                     SummarySelector = "article.detailView .detailViewIntro p",
-                    ContentSelector = "article.detailView .detailViewContent p",
                     ImageOriginalUrlSelector = "article.detailView .detailViewMedia img",
+                    ArticleNodeSelector = "article.detailView .detailViewContent",
+                    ArticleRemoveSelector = ".viberFollow,.marketItem",
                     Rss = new List<string>
                     {
                         "http://www.kurir.rs/rss/najnovije-vesti/"
