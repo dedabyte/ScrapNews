@@ -29,7 +29,15 @@
             return ServerRest.one('query').get({ q: query });
         };
 
-        this.wpimage = function(url){
+        this.publishers = function () {
+            return ServerRest.one('publishers').get();
+        };
+
+        this.categories = function () {
+            return ServerRest.one('categories').get();
+        };
+
+        this.wpimage = function (url) {
             return ServerRest.one('getimage')
                 .withHttpConfig({ responseType: 'blob' })
                 .get({ url: url })

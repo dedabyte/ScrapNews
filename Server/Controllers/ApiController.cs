@@ -23,7 +23,7 @@ namespace Server.Controllers
             try
             {
                 var responseData = new List<dynamic>();
-                using (var connection = Db.getConnection("articles"))
+                using (var connection = Db.getConnection("articles", true))
                 {
                     connection.Open();
                     using (var cmd = new SQLiteCommand(q, connection))
@@ -41,6 +41,107 @@ namespace Server.Controllers
                                 }
                                 responseData.Add(map);
                                 index++;
+                            }
+                        }
+                    }
+                }
+
+                return new JsonNetResult { Data = new Response { data = responseData } };
+            }
+            catch (Exception e)
+            {
+                return new JsonNetResult { Data = new Response { error = true, message = e.Message } };
+            }
+        }
+
+        [AuthAjaxFilter]
+        public JsonNetResult Publishers()
+        {
+            try
+            {
+                var responseData = new List<Dictionary<string, object>>();
+                using (var connection = Db.getConnection("articles", true))
+                {
+                    connection.Open();
+                    var sql = @"select publisher, count(publisher) as hits from articles group by publisher order by publisher";
+                    using (var cmd = new SQLiteCommand(sql, connection))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var pubsliher = (string)reader["publisher"];
+                                var hits = Convert.ToInt32(reader["hits"]);
+                                responseData.Add(new Dictionary<string, object>
+                                {
+                                    { "name", pubsliher },
+                                    { "hits", hits }
+                                });
+                            }
+                        }
+                    }
+                }
+
+                return new JsonNetResult { Data = new Response { data = responseData } };
+            }
+            catch (Exception e)
+            {
+                return new JsonNetResult { Data = new Response { error = true, message = e.Message } };
+            }
+        }
+
+        [AuthAjaxFilter]
+        public JsonNetResult Categories()
+        {
+            try
+            {
+                var responseData = new List<Dictionary<string, object>>();
+                using (var connection = Db.getConnection("articles", true))
+                {
+                    connection.Open();
+                    var sql = @"select KAT.category, PUB.publisher, count(KAT.category) as hits
+                                from
+                                (
+                                   select category
+                                   from articles
+                                   group by category
+                                ) as KAT
+                                join
+                                (
+                                   select publisher
+                                   from articles
+                                   group by publisher
+                                ) as PUB
+                                join articles as T
+                                on T.category = KAT.category and T.publisher = PUB.publisher
+                                group by T.category,T.publisher
+                                order by T.category";
+                    using (var cmd = new SQLiteCommand(sql, connection))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var category = (string) reader["category"];
+                                var pubsliher = (string) reader["publisher"];
+                                if(!responseData.Any(x => x.ContainsValue(category)))
+                                {
+                                    var pubsliherObject = new Dictionary<string, object>
+                                    {
+                                        { "name", category },
+                                        { pubsliher, true },
+                                        { "hits", Convert.ToInt32(reader["hits"]) }
+                                    };
+                                    responseData.Add(pubsliherObject);
+                                }
+                                else
+                                {
+                                    var publishersObject = responseData.Where(x => x.ContainsValue(category)).ToList()[0];
+                                    if (!publishersObject.ContainsKey(pubsliher))
+                                    {
+                                        publishersObject.Add(pubsliher, true);
+                                    }
+                                }
                             }
                         }
                     }
