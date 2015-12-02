@@ -7,14 +7,14 @@
 <div class="app-column filters-column" sn-filters>
     <div class="filters-column-group">
         <div class="filters-column-group-title">Publishers</div>
-        <div class="filter-item" ng-repeat="filter in snFilters.publishers" ng-class="{ selected: filter.selected }" ng-click="snFilters.changePublisher(filter, $event, 'publishers')">
+        <div class="filter-item" ng-repeat="filter in snFilters.publishers" ng-class="{ selected: filter.selected }" ng-click="snFilters.changePublisher(filter, $event)">
             <span ng-bind=":: filter.name"></span> (<small ng-bind=":: filter.hits"></small>)
         </div>
     </div>
     <div class="filters-column-group">
         <div class="filters-column-group-title">Categories</div>
-        <div class="filter-item" ng-repeat="filter in snFilters.categories" ng-class="{ selected: filter.selected }" ng-click="snFilters.changeCategory(filter, $event, 'categories')">
-            <span ng-bind=":: filter.name"></span>
+        <div class="filter-item" ng-repeat="filter in snFilters.categories" ng-class="{ selected: filter.selected }" ng-click="snFilters.changeCategory(filter, $event)">
+            <span ng-bind=":: filter.name"></span> (<small ng-bind="snFilters.getHitsForCategory(filter)"></small>)
         </div>
     </div>
 </div>

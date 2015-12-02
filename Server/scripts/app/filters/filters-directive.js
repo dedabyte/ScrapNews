@@ -14,6 +14,7 @@
                   // for cache
                   var publishers = [];
                   var categories = [];
+                  var selectedPublishers = [];
                   // for view
                   self.publishers = [];
                   self.categories = [];
@@ -39,7 +40,7 @@
                           filter.selected = true;
                       }
 
-                      var selectedPublishers = self.publishers.filter(function(pub){
+                      selectedPublishers = self.publishers.filter(function(pub){
                           return pub.selected === true;
                       });
                       if (selectedPublishers.length) {
@@ -71,23 +72,35 @@
                   }
 
                   function publishSelected(){
-                      var selectedCategories = self.categories.filter(function (item) {
+                      var selCategories = self.categories.filter(function (item) {
                           return item.selected;
                       }).map(function (item) {
                           return item.name;
                       });
 
-                      var selectedPublishers = self.publishers.filter(function (item) {
+                      var selPublishers = self.publishers.filter(function (item) {
                           return item.selected;
                       }).map(function (item) {
                           return item.name;
                       });
 
-                      EventsService.publish('sn-filters', { publishers: selectedPublishers, categories: selectedCategories });
+                      EventsService.publish('sn-filters', { publishers: selPublishers, categories: selCategories });
+                  }
+                  
+                  function getHitsForCategory(cat){
+                      if(!selectedPublishers.length){
+                          return cat.hits;
+                      }
+                      var hits = 0;
+                      selectedPublishers.forEach(function(pub){
+                          hits += cat[pub.name];
+                      });
+                      return hits;
                   }
 
                   self.changePublisher = changePublisher;
                   self.changeCategory = changeCategory;
+                  self.getHitsForCategory = getHitsForCategory;
 
                   getFiltersFromServer();
               }

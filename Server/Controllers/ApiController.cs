@@ -124,13 +124,14 @@ namespace Server.Controllers
                             {
                                 var category = (string) reader["category"];
                                 var pubsliher = (string) reader["publisher"];
+                                var hits = Convert.ToInt32(reader["hits"]);
                                 if(!responseData.Any(x => x.ContainsValue(category)))
                                 {
                                     var pubsliherObject = new Dictionary<string, object>
                                     {
                                         { "name", category },
-                                        { pubsliher, true },
-                                        { "hits", Convert.ToInt32(reader["hits"]) }
+                                        { pubsliher, hits },
+                                        { "hits", hits }
                                     };
                                     responseData.Add(pubsliherObject);
                                 }
@@ -139,7 +140,9 @@ namespace Server.Controllers
                                     var publishersObject = responseData.Where(x => x.ContainsValue(category)).ToList()[0];
                                     if (!publishersObject.ContainsKey(pubsliher))
                                     {
-                                        publishersObject.Add(pubsliher, true);
+                                        publishersObject.Add(pubsliher, hits);
+                                        var existingHits = Convert.ToInt32(publishersObject["hits"]);
+                                        publishersObject["hits"] = existingHits + hits;
                                     }
                                 }
                             }
