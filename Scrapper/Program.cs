@@ -226,7 +226,7 @@ namespace Scrapper
                 var urlRss = urlsFromRSS[i];
                 if(pageModel.SkipUrlRegex != null)
                 {
-                    var match = pageModel.SkipUrlRegex.IsMatch(urlRss);
+                    var match = pageModel.GetSkipUrlRegex().IsMatch(urlRss);
                     if(match)
                     {
                         Console.WriteLine("REGX - " + urlRss);
@@ -263,40 +263,42 @@ namespace Scrapper
             var now = DateTime.Now;
             Console.WriteLine("> Scrapper started: " + now.ToShortDateString() + " " + now.ToLongTimeString());
 
-            var pageModels = new List<PageModel>
-            {
-                new PageModel
-                {
-                    Publisher = "b92",
-                    CategorySelector = "article.item-page .category a, article .article-header small a",
-                    TitleSelector = "article.item-page .article-header h1",
-                    SummarySelector = "article.item-page .article-header p",
-                    ImageOriginalUrlSelector = "article.item-page .article-header img",
-                    ArticleNodeSelector = "article.item-page",
-                    ArticleRemoveSelector = ".article-header,table,.related,.banner-inText,.banners-middle,.article-footer,.content-exchange",
-                    ImagePrefix = "http://www.b92.net",
-                    SkipSelector = "article.item-page.video",
-                    SkipUrlRegex = new Regex("/video/", RegexOptions.IgnoreCase),
-                    Rss = new List<string>
-                    {
-                        "http://www.b92.net/info/rss/novo.xml"
-                    }
-                },
-                new PageModel
-                {
-                    Publisher = "kurir",
-                    CategorySelector = "article.detailView .detailViewHeader .category",
-                    TitleSelector = "article.detailView .detailViewHeader h1.title",
-                    SummarySelector = "article.detailView .detailViewIntro p",
-                    ImageOriginalUrlSelector = "article.detailView .detailViewMedia img",
-                    ArticleNodeSelector = "article.detailView .detailViewContent",
-                    ArticleRemoveSelector = ".viberFollow,.marketItem",
-                    Rss = new List<string>
-                    {
-                        "http://www.kurir.rs/rss/najnovije-vesti/"
-                    }
-                }
-            };
+            //var pageModels = new List<PageModel>
+            //{
+            //    new PageModel
+            //    {
+            //        Publisher = "b92",
+            //        CategorySelector = "article.item-page .category a, article .article-header small a",
+            //        TitleSelector = "article.item-page .article-header h1",
+            //        SummarySelector = "article.item-page .article-header p",
+            //        ImageOriginalUrlSelector = "article.item-page .article-header img",
+            //        ArticleNodeSelector = "article.item-page",
+            //        ArticleRemoveSelector = ".article-header,table,.related,.banner-inText,.banners-middle,.article-footer,.content-exchange",
+            //        ImagePrefix = "http://www.b92.net",
+            //        SkipSelector = "article.item-page.video",
+            //        SkipUrlRegex = new Regex("/video/", RegexOptions.IgnoreCase),
+            //        Rss = new List<string>
+            //        {
+            //            "http://www.b92.net/info/rss/novo.xml"
+            //        }
+            //    },
+            //    new PageModel
+            //    {
+            //        Publisher = "kurir",
+            //        CategorySelector = "article.detailView .detailViewHeader .category",
+            //        TitleSelector = "article.detailView .detailViewHeader h1.title",
+            //        SummarySelector = "article.detailView .detailViewIntro p",
+            //        ImageOriginalUrlSelector = "article.detailView .detailViewMedia img",
+            //        ArticleNodeSelector = "article.detailView .detailViewContent",
+            //        ArticleRemoveSelector = ".viberFollow,.marketItem",
+            //        Rss = new List<string>
+            //        {
+            //            "http://www.kurir.rs/rss/najnovije-vesti/"
+            //        }
+            //    }
+            //};
+
+            var pageModels = PageConfigReader.GetConfig();
 
             foreach (var pageModel in pageModels)
             {

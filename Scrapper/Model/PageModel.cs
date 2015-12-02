@@ -15,7 +15,7 @@ namespace Scrapper.Model
         public string ArticleRemoveSelector { get; set; }
 
         public string SkipSelector { get; set; }
-        public Regex SkipUrlRegex { get; set; }
+        public string SkipUrlRegex { get; set; }
         
         public string ImagePrefix { get; set; }
         public string Publisher { get; set; }
@@ -38,6 +38,11 @@ namespace Scrapper.Model
             ImagePrefix = "";
             Publisher = "unknown";
             Rss = new List<string>();
+        }
+
+        public Regex GetSkipUrlRegex()
+        {
+            return new Regex(SkipUrlRegex, RegexOptions.IgnoreCase);
         }
     }
 }
