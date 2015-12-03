@@ -73,6 +73,15 @@ namespace Scrapper
                     }
                 }
 
+                // TODO jel treba ovo?
+                // replace anchors
+                //foreach (var element in jqContent.QuerySelectorAll("a").ToList())
+                //{
+                //    var newElement = document.CreateElement("span");
+                //    newElement.InnerHtml = element.InnerHtml;
+                //    element.Replace(newElement);
+                //}
+
                 var content = jqContent.InnerHtml.Safe();
 
                 var ts = Helpers.Timestamp();
