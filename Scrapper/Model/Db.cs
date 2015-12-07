@@ -1,6 +1,6 @@
 ﻿using System.Data.SQLite;
 
-namespace Scrapper.Model
+namespace NewsScraper.Model
 {
     public static class Db
     {

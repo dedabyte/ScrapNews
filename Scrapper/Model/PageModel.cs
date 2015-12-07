@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Scrapper.Model
+namespace NewsScraper.Model
 {
     public class PageModel
     {

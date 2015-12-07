@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
 
-namespace Scrapper.Model
+namespace NewsScraper.Model
 {
     public static class PageConfigReader
     {

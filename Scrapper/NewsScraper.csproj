@@ -7,8 +7,8 @@
     <ProjectGuid>{DB4C0790-E201-498F-963D-22297473E1F4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scrapper</RootNamespace>
-    <AssemblyName>Scrapper</AssemblyName>
+    <RootNamespace>NewsScraper</RootNamespace>
+    <AssemblyName>NewsScraper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

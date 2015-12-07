@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scrapper.Model
+namespace NewsScraper.Model
 {
     public static class Helpers
     {
