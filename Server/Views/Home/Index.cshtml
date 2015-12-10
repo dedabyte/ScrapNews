@@ -41,7 +41,7 @@
         <div class="preview-column-title m-bot" ng-bind="snPreview.article.title"></div>
         <div class="preview-column-content m-bot" id="_content">
             <p><b ng-bind="snPreview.article.summary"></b></p>
-            <p><img id="_featuredImage" ng-src="{{snPreview.article.image_original_url || snPreview.article.image_rss_original_url || ''}}" alt="" /></p>
+            <p><img ng-src="{{snPreview.article.image_original_url || snPreview.article.image_rss_original_url || ''}}" alt="" /></p>
             <p ng-bind-html="snPreview.article.contentHtml"></p>
         </div>
     </div>

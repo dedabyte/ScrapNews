@@ -7,7 +7,7 @@
     angular
       .module('app')
       .directive(componentName, function (Server, EventsService) {
-          var $content = $('#_content');
+          //var $content = $('#_content');
 
           return {
               controllerAs: componentName,
@@ -28,12 +28,10 @@
                       Server
                           .wpimage(self.article.image_original_url || self.article.image_rss_original_url)
                           .then(function (image) {
-                              var content = $content.clone();
-                              content.find('#_featuredImage').attr('src', image.source_url);
                               var postConfig = {
                                   title: self.article.title,
                                   status: 'publish',
-                                  content: content.html(),
+                                  content: createContent(image, self.article)
                                   //featured_image: image.id // TODO vratiti ovo kad vidimo zasto brlja
                               };
                               Server.wppost(postConfig).
@@ -44,6 +42,17 @@
                                       }
                                   });
                           });
+                  }
+
+                  function createContent(image, article) {
+                      var $content = $('<div><p></p><p></p><p></p></div>');
+                      var $contentParagraphs = $content.find('p');
+
+                      $contentParagraphs.eq(0).html('<b>' + article.summary + '</b>');
+                      $contentParagraphs.eq(1).html('<img src="' + image.source_url + '"/>');
+                      $contentParagraphs.eq(2).html(article.content);
+
+                      return $content.html();
                   }
 
                   self.post = post;
