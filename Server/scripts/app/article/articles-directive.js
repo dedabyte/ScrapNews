@@ -32,6 +32,18 @@
                       getArticlesFromServer(filters.publishers, filters.categories);
                   });
 
+                  function timestampToISO(ts) {
+                      ts = ts + '';
+                      var y, m, d, hh, mm;
+                      y = parseInt(ts.substr(0, 4));
+                      m = parseInt(ts.substr(4, 2)) - 1;
+                      d = parseInt(ts.substr(6, 2));
+                      hh = parseInt(ts.substr(8, 2));
+                      mm = parseInt(ts.substr(10, 2));
+                      return (new Date(y, m, d, hh, mm)).toISOString();
+                  }
+
+                  self.timestampToISO = timestampToISO;
                   self.selectArticle = selectArticle;
 
                   getArticlesFromServer();

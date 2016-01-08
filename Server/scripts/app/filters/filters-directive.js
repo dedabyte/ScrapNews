@@ -18,6 +18,7 @@
                   // for view
                   self.publishers = [];
                   self.categories = [];
+                  self.disabledCategories = [];
 
                   function getFiltersFromServer() {
                       Server.publishers().then(function (response) {
@@ -27,6 +28,13 @@
                       Server.categories().then(function (response) {
                           self.categories = response.data;
                           categories = self.categories;
+                      });
+                  }
+
+                  // TODO move to user service!
+                  function getDisabledCategoriesFromServer() {
+                      Server.userProfile().then(function (response) {
+                          self.disabledCategories = response.data.disabled_categories.split(',');
                       });
                   }
                   
@@ -98,11 +106,17 @@
                       return hits;
                   }
 
+                  function isCategoryDisabled(cat) {
+                      return self.disabledCategories.indexOf(cat.name) > -1;
+                  }
+
                   self.changePublisher = changePublisher;
                   self.changeCategory = changeCategory;
+                  self.isCategoryDisabled = isCategoryDisabled;
                   self.getHitsForCategory = getHitsForCategory;
 
                   getFiltersFromServer();
+                  getDisabledCategoriesFromServer();
               }
           };
       });

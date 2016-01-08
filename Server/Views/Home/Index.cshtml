@@ -13,7 +13,7 @@
     </div>
     <div class="filters-column-group">
         <div class="filters-column-group-title">Categories</div>
-        <div class="filter-item" ng-repeat="filter in snFilters.categories" ng-class="{ selected: filter.selected }" ng-click="snFilters.changeCategory(filter, $event)">
+        <div class="filter-item" ng-repeat="filter in snFilters.categories" ng-class="{ selected: filter.selected }" ng-click="snFilters.changeCategory(filter, $event)" ng-hide="snFilters.isCategoryDisabled(filter)">
             <span ng-bind=":: filter.name"></span> (<small ng-bind="snFilters.getHitsForCategory(filter)"></small>)
         </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="article-short-data">
             <p class="article-short-title" ng-bind=":: article.title"></p>
             <p class="article-short-summary" ng-bind=":: article.summary"></p>
-            <p class="article-short-meta"><b ng-bind=":: article.publisher"></b> | <b ng-bind=":: article.category"></b></p>
+            <p class="article-short-meta"><b ng-bind=":: article.publisher"></b> | <b ng-bind=":: article.category"></b> | <span sn-timeago="{{::snArticles.timestampToISO(article.timestamp)}}" data-refresh></span></p>
         </div>
     </div>
     <div class="empty-column" ng-hide="snArticles.articles.length > 0">
@@ -52,7 +52,9 @@
 
 <div class="app-column right-column">
     <div sn-wp-post>
-        <button ng-click="snWpPost.post()" ng-disabled="snWpPost.article === null">post to wordpress</button>
+        <p ng-repeat="wp in snWpPost.wps">
+            <span ng-bind=":: wp.wp_name"></span> <button ng-click="snWpPost.post(wp)" ng-disabled="snWpPost.article === null">post</button>
+        </p>
     </div>
 </div>
 
@@ -65,6 +67,7 @@
 <script src="~/scripts/app/filters/filters-directive.js"></script>
 <script src="~/scripts/app/article/articles-directive.js"></script>
 <script src="~/scripts/app/article/article-preview-directive.js"></script>
+<script src="~/scripts/app/article/timeago-directive.js"></script>
 <script src="~/scripts/app/wordpress/wordpress-directive.js"></script>
 }
 else

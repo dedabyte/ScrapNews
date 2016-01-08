@@ -10,12 +10,22 @@
             });
         });
 
+    //angular
+    //    .module('app')
+    //    .factory('WPRest', function (Restangular) {
+    //        return Restangular.withConfig(function (RestangularConfigurer) {
+    //            RestangularConfigurer.setBaseUrl('http://www.nighttrainns.info/wp-json/wp/v2');
+    //        });
+    //    });
+
     angular
         .module('app')
-        .factory('WPRest', function (Restangular) {
-            return Restangular.withConfig(function (RestangularConfigurer) {
-                RestangularConfigurer.setBaseUrl('http://www.nighttrainns.info/wp-json/wp/v2');
-            });
+        .service('WPRest', function (Restangular) {
+            this.getRest = function (wpConfiguration) {
+                return Restangular.withConfig(function (RestangularConfigurer) {
+                    RestangularConfigurer.setBaseUrl(wpConfiguration.wp_api);
+                });
+            };            
         });
 
 
@@ -37,7 +47,14 @@
             return ServerRest.one('categories').get();
         };
 
-        this.wpimage = function (url) {
+        this.userProfile = function () {
+            return ServerRest.one('userprofile').get();
+        };
+
+
+
+        this.wpimage = function (url, wpConfiguration) {
+            var wpRest = WPRest.getRest(wpConfiguration);
             return ServerRest.one('getimage')
                 .withHttpConfig({ responseType: 'blob' })
                 .get({ url: url })
@@ -46,18 +63,19 @@
                     var filename = url.split('/').pop();
                     imageData.append('file', new File([response], filename));
 
-                    return WPRest.one('media')
+                    return wpRest.one('media')
                         .post(null, imageData, null, {
-                            'Authorization': 'Basic ' + btoa('test:test'),
+                            'Authorization': wpConfiguration.wp_auth_token,
                             'Content-Type': undefined
                         });
                 });
         };
 
-        this.wppost = function(postConfig){
-            return WPRest.one('posts')
+        this.wppost = function (postConfig, wpConfiguration) {
+            var wpRest = WPRest.getRest(wpConfiguration);
+            return wpRest.one('posts')
                 .post(null, $.param(postConfig), null, {
-                    'Authorization': 'Basic ' + btoa('test:test'),
+                    'Authorization': wpConfiguration.wp_auth_token,
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 });
         };

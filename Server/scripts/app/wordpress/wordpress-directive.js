@@ -24,17 +24,24 @@
                       self.article = article;
                   });
 
-                  function post() {
+                  // TODO move to user service!
+                  function getWps() {
+                      Server.userProfile().then(function (response) {
+                          self.wps = response.data.wps;
+                      });
+                  }
+
+                  function post(wpConfig) {
                       Server
-                          .wpimage(self.article.image_original_url || self.article.image_rss_original_url)
+                          .wpimage(self.article.image_original_url || self.article.image_rss_original_url, wpConfig)
                           .then(function (image) {
                               var postConfig = {
                                   title: self.article.title,
                                   status: 'publish',
-                                  content: createContent(image, self.article)
-                                  //featured_image: image.id // TODO vratiti ovo kad vidimo zasto brlja
+                                  content: createContent(image, self.article),
+                                  featured_image: image.id
                               };
-                              Server.wppost(postConfig).
+                              Server.wppost(postConfig, wpConfig).
                                   then(function (response) {
                                       if(response.id){
                                           console.log(response.plain());
@@ -56,6 +63,8 @@
                   }
 
                   self.post = post;
+
+                  getWps();
               }
           };
       });
