@@ -133,6 +133,7 @@
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Db.cs" />
     <Compile Include="Models\Filters\AuthAjaxFilter.cs" />
+    <Compile Include="Models\Filters\CorsFilter.cs" />
     <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Models\Response.cs" />

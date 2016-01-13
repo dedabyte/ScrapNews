@@ -85,7 +85,7 @@ else
         function login(){
             $.ajax({
                 type: 'POST',
-                url: 'api/login',
+                url: 'api/authenticate',
                 data: {
                     user: $('#user').val().trim(),
                     pass: $('#pass').val().trim()

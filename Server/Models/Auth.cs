@@ -12,15 +12,16 @@ namespace Server.Models
         {
             UserId = 0;
             Guid = null;
-            var cookie = request.Cookies[Constants.COOKIE_AUTH];
+            //var cookie = request.Cookies[Constants.COOKIE_AUTH];
+            var token = request.Headers["SN-Auth"];
             try
             {
-                if (cookie == null)
+                if (token == null)
                 {
                     return false;
                 }
 
-                var cookieValueDecoded = Helpers.CDecode(cookie.Value).Split(':');
+                var cookieValueDecoded = Helpers.CDecode(token).Split(':');
                 var guid = cookieValueDecoded[0];
                 var id = Convert.ToInt32(cookieValueDecoded[1]);
 
@@ -61,6 +62,16 @@ namespace Server.Models
                 Expires = DateTime.Now.AddMinutes(minutes)
             };
             response.SetCookie(cookie);
+        }
+
+        public static void SetAuthHeader(HttpResponseBase response, int userId, string guid, int minutes = 60)
+        {
+            if (userId < 1 || guid == null)
+            {
+                return;
+            }
+
+            response.AddHeader("SN-Auth", Helpers.CEncode(guid + ":" + userId));
         }
 
         public static int CheckCredentials(string user, string pass)
@@ -104,7 +115,8 @@ namespace Server.Models
                 {
                     return false;
                 }
-                SetAuthCooke(response, userId, newGuid, minutes);
+                //SetAuthCooke(response, userId, newGuid, minutes);
+                SetAuthHeader(response, userId, newGuid, minutes);
                 return true;
             }
             catch (Exception)

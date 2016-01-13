@@ -166,16 +166,30 @@ namespace Server.Controllers
             return File(data, "image/jpeg"); ;
         }
 
-        [HttpPost]
-        public JsonNetResult Login(string user, string pass)
+        //public JsonNetResult Login(string user, string pass)
+        //{
+        //    var userId = Auth.CheckCredentials(user, pass);
+        //    if(userId == 0)
+        //    {
+        //        return new JsonNetResult { Data = new Response { error = true, message = "Invalid credentials." } };
+        //    }
+        //    var loginSuccessful = Auth.Login(Response, userId, 30);
+        //    if(!loginSuccessful)
+        //    {
+        //        return new JsonNetResult { Data = new Response { error = true, message = "Login crashed :(" } };
+        //    }
+        //    return new JsonNetResult { Data = new Response { data = Auth.UserProfile(userId), message = "Welcome :)" } };
+        //}
+
+        public JsonNetResult Authenticate(string user, string pass)
         {
             var userId = Auth.CheckCredentials(user, pass);
-            if(userId == 0)
+            if (userId == 0)
             {
                 return new JsonNetResult { Data = new Response { error = true, message = "Invalid credentials." } };
             }
             var loginSuccessful = Auth.Login(Response, userId, 30);
-            if(!loginSuccessful)
+            if (!loginSuccessful)
             {
                 return new JsonNetResult { Data = new Response { error = true, message = "Login crashed :(" } };
             }
@@ -185,7 +199,7 @@ namespace Server.Controllers
         [AuthAjaxFilter]
         public JsonNetResult UserProfile()
         {
-            return new JsonNetResult { Data = new Response { data = Auth.UserProfile(UserId) } };
+            return new JsonNetResult { Data = new Response { data = Auth.UserProfile(1) } };
         }
     }
 }
