@@ -24,13 +24,6 @@
             self.article = article;
           });
 
-          // TODO move to user service!
-          function getWps(){
-            Server.userProfile().then(function(response){
-              self.wps = response.data.wps;
-            });
-          }
-
           function post(wpConfig){
             Server
               .wpimage(self.article.image_original_url || self.article.image_rss_original_url, wpConfig)
@@ -62,9 +55,11 @@
             return $content.html();
           }
 
-          self.post = post;
+          EventsService.subscribe('sn-login', $scope, function(e, userProfile){
+            self.wps = userProfile.wps;
+          });
 
-          getWps();
+          self.post = post;
         }
       };
     });

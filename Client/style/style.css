@@ -13,6 +13,19 @@ html, body, .app-wrapper {
 p, h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
+.login-form p {
+  margin: 12px 0; }
+  .login-form p:last-child {
+    text-align: right; }
+.login-form input {
+  outline: none;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #dfdfdf;
+  padding: 2px 4px; }
+  .login-form input:focus {
+    border-color: #f70; }
+
 .app-column {
   position: relative;
   float: left;
@@ -48,7 +61,7 @@ p, h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   padding: 3px 5px; }
   .filter-item:hover {
-    background-color: #fff1e5;
+    background-color: #fff1e6;
     color: #f70; }
   .filter-item.selected {
     background-color: #f70;
@@ -87,7 +100,7 @@ p, h1, h2, h3, h4, h5, h6 {
     font-size: 11px;
     text-transform: uppercase; }
   .article-short:hover {
-    background-color: #fff1e5; }
+    background-color: #fff1e6; }
     .article-short:hover .article-short-title {
       color: #f70; }
   .article-short.selected {

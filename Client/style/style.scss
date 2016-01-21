@@ -30,6 +30,29 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+.login-form {
+
+  p {
+    margin: 12px 0;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  input {
+    outline: none;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $colorBorder;
+    padding: 2px 4px;
+
+    &:focus {
+      border-color: $color1;
+    }
+  }
+}
+
 .app-column {
   position: relative;
   float: left;

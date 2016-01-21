@@ -43,10 +43,12 @@
             return (new Date(y, m, d, hh, mm)).toISOString();
           }
 
+          EventsService.subscribe('sn-login', $scope, function(){
+            getArticlesFromServer();
+          });
+
           self.timestampToISO = timestampToISO;
           self.selectArticle = selectArticle;
-
-          getArticlesFromServer();
         }
       };
     });

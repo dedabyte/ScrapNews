@@ -13,12 +13,13 @@
       ConfirmationDialog.closeAll();
       Server.userProfile().then(
         function(response){
-          self.userProfile = response.plain();
+          self.userProfile = response.data;
           EventsService.publish('sn-login', self.userProfile);
         },
         function(error){
           ConfirmationDialog.open({
             title: 'Login',
+            width: 256,
             content: $compile('<sn-auth></sn-auth>')($rootScope.$new())
           });
           LogService.error('Login error:', error);

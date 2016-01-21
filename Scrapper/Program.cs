@@ -266,10 +266,17 @@ namespace NewsScraper
         
         static int Main(string[] args)
         {
-            Console.SetBufferSize(200, 2000);
-            Console.SetWindowSize(200, 60);
             var now = DateTime.Now;
             Console.WriteLine("> Scrapper started: " + now.ToShortDateString() + " " + now.ToLongTimeString());
+            try
+            {
+                Console.SetBufferSize(180, 2000);
+                Console.SetWindowSize(180, 40);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("> Warn: Could not set window size.");
+            }
 
             var pageModels = PageConfigReader.GetConfig();
 

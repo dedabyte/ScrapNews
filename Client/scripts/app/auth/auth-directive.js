@@ -10,10 +10,11 @@
       return {
         controllerAs: componentName,
         template:
-          '<p><h3>login</h3></p>' +
-          '<p><input id="user" type="text" placeholder="user" ng-model="snAuth.user"/></p>' +
-          '<p><input id="pass" type="password" placeholder="pass" ng-model="snAuth.pass"/></p>' +
-          '<p><button ng-click="snAuth.login()" ng-disabled="!snAuth.user || !snAuth.pass">Login</button></p>',
+          '<form class="login-form" ng-submit="snAuth.login()">' +
+          '<p><input id="user" type="text" placeholder="Username" ng-model="snAuth.user" autofocus/></p>' +
+          '<p><input id="pass" type="password" placeholder="Password" ng-model="snAuth.pass"/></p>' +
+          '<p><button type="submit" ng-disabled="!snAuth.user || !snAuth.pass">Login</button></p>' +
+          '</form>',
         controller: function(){
           var self = this;
 
@@ -30,7 +31,8 @@
                   console.error(response.message);
                   return;
                 }
-                //location.reload(true);
+                localStorage.setItem('sn-token', response.data.token);
+                location.reload(true);
               }
             });
           }

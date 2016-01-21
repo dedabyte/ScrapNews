@@ -193,7 +193,15 @@ namespace Server.Controllers
             {
                 return new JsonNetResult { Data = new Response { error = true, message = "Login crashed :(" } };
             }
-            return new JsonNetResult { Data = new Response { data = Auth.UserProfile(userId), message = "Welcome :)" } };
+            return new JsonNetResult {
+                Data = new Response {
+                    data = new {
+                        token = Response.Headers["SN-Auth"],
+                        profile = Auth.UserProfile(userId),
+                    },
+                    message = "Welcome :)"
+                }
+            };
         }
 
         [AuthAjaxFilter]

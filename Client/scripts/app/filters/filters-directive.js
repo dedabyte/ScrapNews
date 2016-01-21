@@ -9,7 +9,7 @@
     .directive(componentName, function(Server, EventsService){
       return {
         controllerAs: componentName,
-        controller: function(){
+        controller: function($scope){
           var self = this;
           // for cache
           var publishers = [];
@@ -28,13 +28,6 @@
             Server.categories().then(function(response){
               self.categories = response.data;
               categories = self.categories;
-            });
-          }
-
-          // TODO move to user service!
-          function getDisabledCategoriesFromServer(){
-            Server.userProfile().then(function(response){
-              self.disabledCategories = response.data.disabled_categories.split(',');
             });
           }
 
@@ -101,7 +94,7 @@
             }
             var hits = 0;
             selectedPublishers.forEach(function(pub){
-              hits += cat[pub.name];
+              hits += (cat[pub.name] || 0)  ;
             });
             return hits;
           }
@@ -110,13 +103,15 @@
             return self.disabledCategories.indexOf(cat.name) > -1;
           }
 
+          EventsService.subscribe('sn-login', $scope, function(e, userProfile){
+            self.disabledCategories = userProfile.disabled_categories.split(',');
+            getFiltersFromServer();
+          });
+
           self.changePublisher = changePublisher;
           self.changeCategory = changeCategory;
           self.isCategoryDisabled = isCategoryDisabled;
           self.getHitsForCategory = getHitsForCategory;
-
-          getFiltersFromServer();
-          getDisabledCategoriesFromServer();
         }
       };
     });
