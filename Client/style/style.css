@@ -175,7 +175,9 @@ p, h1, h2, h3, h4, h5, h6 {
     .confirmation-dialog .dialog .dialog-content {
       font-size: 14px;
       padding: 30px 20px;
-      word-wrap: break-word; }
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow: auto; }
       .confirmation-dialog .dialog .dialog-content.no-padding {
         padding: 0; }
     .confirmation-dialog .dialog .dialog-footer {
@@ -186,9 +188,9 @@ p, h1, h2, h3, h4, h5, h6 {
       cursor: pointer;
       position: absolute;
       right: 20px;
-      top: 19px;
-      width: 10px;
-      height: 10px; }
+      top: 10px;
+      color: #fff;
+      font-size: 20px; }
     .confirmation-dialog .dialog.dialog-in {
       animation-name: dialog-in;
       animation-iteration-count: 1;

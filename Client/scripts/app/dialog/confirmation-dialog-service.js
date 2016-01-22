@@ -28,6 +28,7 @@
    *   sticky:           // bool
    *   error:            // bool
    *   template: {
+   *     template:    // string NOTE: use template OR templateUrl
    *     templateUrl: // string
    *     scope:       // angular scope object
    *   }                 // object
@@ -59,7 +60,7 @@
     '      </div>' +
     '      <div class="dialog-content"></div>' +
     '      <div class="dialog-footer"></div>' +
-    '      <div class="dialog-x"></div>' +
+    '      <div class="dialog-x">&times;</div>' +
     '    </div>' +
     '  </div>' +
     '</div>';
@@ -147,8 +148,8 @@
 
       // add content
       if(config.template){
-        var templateFromUrl = $templateCache.get(config.template.templateUrl);
-        jqConfirmDialogContent.html($compile(templateFromUrl)(config.template.scope));
+        var templateHtml = config.template.template || $templateCache.get(config.template.templateUrl);
+        jqConfirmDialogContent.html($compile(templateHtml)(config.template.scope));
       }else{
         jqConfirmDialogContent.html(config.content);
       }

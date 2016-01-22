@@ -6,7 +6,7 @@
 
   angular
     .module('app')
-    .directive(componentName, function(Server, EventsService){
+    .directive(componentName, function(Server, EventsService, ConfirmationDialog){
       return {
         controllerAs: componentName,
         controller: function($scope){
@@ -103,6 +103,30 @@
             return self.disabledCategories.indexOf(cat.name) > -1;
           }
 
+          function openConfigDialog(){
+            self.categoriesForConfig = angular.copy(self.categories);
+            self.categoriesForConfig.forEach(function(cat){
+              cat.checked = !isCategoryDisabled(cat);
+            });
+            var template =
+              '<p ng-repeat="filter in snFilters.categoriesForConfig">' +
+              '<label><input type="checkbox" ng-model="filter.checked">{{:: filter.name}} <small>({{:: filter.hits}})</small></label>' +
+              '</p>';
+            $scope.dialogId = ConfirmationDialog.open({
+              title: 'Configure categories',
+              template: {
+                template: template,
+                scope: $scope
+              },
+              showX: true,
+              width: 256,
+              buttons: [
+                { label: 'Save' },
+                { label: 'Cancel' }
+              ]
+            });
+          }
+
           EventsService.subscribe('sn-login', $scope, function(e, userProfile){
             self.disabledCategories = userProfile.disabled_categories.split(',');
             getFiltersFromServer();
@@ -112,6 +136,7 @@
           self.changeCategory = changeCategory;
           self.isCategoryDisabled = isCategoryDisabled;
           self.getHitsForCategory = getHitsForCategory;
+          self.openConfigDialog = openConfigDialog;
         }
       };
     });

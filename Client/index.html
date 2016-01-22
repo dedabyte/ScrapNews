@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="filters-column-group">
-      <div class="filters-column-group-title">Categories <small><a href="#">config</a></small></div>
+      <div class="filters-column-group-title">Categories <small ng-click="snFilters.openConfigDialog()">config</small></div>
       <div class="filter-item" ng-repeat="filter in snFilters.categories" ng-class="{ selected: filter.selected }"
            ng-click="snFilters.changeCategory(filter, $event)" ng-hide="snFilters.isCategoryDisabled(filter)">
         <span ng-bind=":: filter.name"></span> (<small ng-bind="snFilters.getHitsForCategory(filter)"></small>)
