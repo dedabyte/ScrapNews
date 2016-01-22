@@ -111,7 +111,7 @@
               cat.checked = !isCategoryDisabled(cat);
             });
             var template =
-              '<p ng-repeat="filter in snFilters.categoriesForConfig">' +
+              '<p class="filters-config-p" ng-repeat="filter in snFilters.categoriesForConfig">' +
               '<label><input type="checkbox" ng-model="filter.checked">{{:: filter.name}} <small>({{:: filter.hits}})</small></label>' +
               '</p>';
             dialogId = ConfirmationDialog.open({

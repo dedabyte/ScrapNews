@@ -67,6 +67,23 @@ p, h1, h2, h3, h4, h5, h6 {
     background-color: #f70;
     color: #fff; }
 
+.filters-config-button {
+  float: right;
+  cursor: pointer;
+  margin-top: 2px; }
+  .filters-config-button:hover {
+    text-decoration: underline; }
+
+.filters-config-p {
+  margin: 2px 0;
+  font-size: 13px; }
+  .filters-config-p input[type=checkbox] {
+    vertical-align: top;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    margin-top: 0px; }
+
 .articles-column {
   width: 380px; }
 
