@@ -34,6 +34,10 @@ namespace NewsScraper
                 // populate text vars
                 var publisher = pageModel.Publisher;
                 var category = jqCategory.Any() ? jqCategory[0].TextContent.Safe().ToLower() : "";
+                if (string.IsNullOrEmpty(category))
+                {
+                    category = "-";
+                }
                 var title = jqTitle[0].TextContent.Safe();
                 var summary = jqSummary.Any() ? jqSummary[0].TextContent.Safe() : "";
                 var imageOriginalUrl = jqImageOriginalUrl.Any() ? pageModel.ImagePrefix + jqImageOriginalUrl[0].GetAttribute("src").Safe() : "";
