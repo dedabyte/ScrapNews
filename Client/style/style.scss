@@ -235,6 +235,38 @@ p, h1, h2, h3, h4, h5, h6 {
   width: calc(100% - #{$widthFilters} - #{$widthArticlesShort} - #{$widthArticlePreview});
 }
 
+.wp-config-p {
+  margin: 8px 0;
+
+  input {
+    outline: none;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid $colorBorder;
+    padding: 2px 4px;
+    margin: 0 6px;
+
+    &:focus {
+      border-color: $color1;
+    }
+  }
+
+  .wp-config-x {
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  .wp-config-inp-name { width: 150px; }
+  .wp-config-inp-url { width: 300px; }
+  .wp-config-inp-type { width: 100px; }
+  .wp-config-inp-token { width: 250px; }
+}
+
 .confirmation-dialog {
   display: none;
   position: fixed;

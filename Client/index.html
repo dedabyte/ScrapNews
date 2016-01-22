@@ -79,9 +79,10 @@
   <div class="app-column right-column">
     <div sn-wp-post>
       <p ng-repeat="wp in snWpPost.wps">
-        <span ng-bind=":: wp.wp_name"></span>
+        <span ng-bind="wp.wp_name"></span>
         <button ng-click="snWpPost.post(wp)" ng-disabled="snWpPost.article === null">post</button>
       </p>
+      <button ng-click="snWpPost.openConfigDialog()">config</button>
     </div>
   </div>
 

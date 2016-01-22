@@ -61,7 +61,7 @@ p, h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   padding: 3px 5px; }
   .filter-item:hover {
-    background-color: #fff1e5;
+    background-color: #fff1e6;
     color: #f70; }
   .filter-item.selected {
     background-color: #f70;
@@ -117,7 +117,7 @@ p, h1, h2, h3, h4, h5, h6 {
     font-size: 11px;
     text-transform: uppercase; }
   .article-short:hover {
-    background-color: #fff1e5; }
+    background-color: #fff1e6; }
     .article-short:hover .article-short-title {
       color: #f70; }
   .article-short.selected {
@@ -155,6 +155,32 @@ p, h1, h2, h3, h4, h5, h6 {
 .right-column {
   padding: 10px;
   width: calc(100% - 180px - 380px - 500px); }
+
+.wp-config-p {
+  margin: 8px 0; }
+  .wp-config-p input {
+    outline: none;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #dfdfdf;
+    padding: 2px 4px;
+    margin: 0 6px; }
+    .wp-config-p input:focus {
+      border-color: #f70; }
+  .wp-config-p .wp-config-x {
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px; }
+    .wp-config-p .wp-config-x:hover {
+      color: red; }
+  .wp-config-p .wp-config-inp-name {
+    width: 150px; }
+  .wp-config-p .wp-config-inp-url {
+    width: 300px; }
+  .wp-config-p .wp-config-inp-type {
+    width: 100px; }
+  .wp-config-p .wp-config-inp-token {
+    width: 250px; }
 
 .confirmation-dialog {
   display: none;

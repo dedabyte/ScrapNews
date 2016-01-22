@@ -23,7 +23,7 @@ namespace Server.Models
                     }
 
                     var wps = new List<object>();
-                    var sql2 = "select wp_name,wp_api,wp_auth_type,wp_auth_token from user_wordpress where user_id = " + userId;
+                    var sql2 = "select wp_name,wp_url,wp_auth_type,wp_auth_token from user_wordpress where user_id = " + userId;
                     using (var cmd2 = new SQLiteCommand(sql2, connection))
                     {
                         using (var reader = cmd2.ExecuteReader())

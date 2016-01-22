@@ -272,7 +272,7 @@
     function destroyScopes(jqConfirm){
       jqConfirm.find('.ng-scope').each(function(){
         var scope = $(this).scope();
-        if(scope){
+        if(scope && scope.$id !== 1){
           scope.$destroy();
         }
       });

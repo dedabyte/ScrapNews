@@ -120,7 +120,6 @@
                 template: template,
                 scope: $scope
               },
-              showX: true,
               width: 256,
               buttons: [
                 {

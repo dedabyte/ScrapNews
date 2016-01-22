@@ -23,7 +23,7 @@
         .service('WPRest', function (Restangular) {
             this.getRest = function (wpConfiguration) {
                 return Restangular.withConfig(function (RestangularConfigurer) {
-                    RestangularConfigurer.setBaseUrl(wpConfiguration.wp_api);
+                    RestangularConfigurer.setBaseUrl(wpConfiguration.wp_url);
                 });
             };            
         });
