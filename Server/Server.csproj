@@ -137,6 +137,7 @@
     <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\JsonNetResult.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

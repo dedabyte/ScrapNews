@@ -197,7 +197,7 @@ namespace Server.Controllers
                 Data = new Response {
                     data = new {
                         token = Response.Headers["SN-Auth"],
-                        profile = Auth.UserProfile(userId),
+                        profile = UserData.UserProfile(userId),
                     },
                     message = "Welcome :)"
                 }
@@ -207,7 +207,13 @@ namespace Server.Controllers
         [AuthAjaxFilter]
         public JsonNetResult UserProfile()
         {
-            return new JsonNetResult { Data = new Response { data = Auth.UserProfile(1) } };
+            return new JsonNetResult { Data = new Response { data = UserData.UserProfile(UserId) } };
+        }
+
+        [AuthAjaxFilter]
+        public JsonNetResult SetUserDisabledCategories(string categories)
+        {
+            return new JsonNetResult { Data = new Response { data = UserData.SetDisabledCategories(UserId, categories) } };
         }
     }
 }

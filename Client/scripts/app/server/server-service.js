@@ -43,24 +43,28 @@
     };
 
     this.q = function(query){
-      return ServerRest.one('query').get({ q: query });
+      return ServerRest.one('Query').get({ q: query });
     };
 
     this.publishers = function(){
-      return ServerRest.one('publishers').get();
+      return ServerRest.one('Publishers').get();
     };
 
     this.categories = function(){
-      return ServerRest.one('categories').get();
+      return ServerRest.one('Categories').get();
     };
 
     this.userProfile = function(){
-      return ServerRest.one('userprofile').get();
+      return ServerRest.one('UserProfile').get();
+    };
+
+    this.setDisabledCategories = function(categories){
+      return ServerRest.one('SetUserDisabledCategories').post(null, { categories: categories });
     };
 
     this.wpimage = function(url, wpConfiguration){
       var wpRest = WPRest.getRest(wpConfiguration);
-      return ServerRest.one('getimage')
+      return ServerRest.one('GetImage')
         .withHttpConfig({ responseType: 'blob' })
         .get({ url: url })
         .then(function(response){

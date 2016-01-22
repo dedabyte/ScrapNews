@@ -6,7 +6,7 @@
 
   angular
     .module('app')
-    .directive(componentName, function(Server, EventsService, ConfirmationDialog){
+    .directive(componentName, function(Server, EventsService, LogService, ConfirmationDialog){
       return {
         controllerAs: componentName,
         controller: function($scope){
@@ -19,6 +19,8 @@
           self.publishers = [];
           self.categories = [];
           self.disabledCategories = [];
+
+          var dialogId;
 
           function getFiltersFromServer(){
             Server.publishers().then(function(response){
@@ -112,7 +114,7 @@
               '<p ng-repeat="filter in snFilters.categoriesForConfig">' +
               '<label><input type="checkbox" ng-model="filter.checked">{{:: filter.name}} <small>({{:: filter.hits}})</small></label>' +
               '</p>';
-            $scope.dialogId = ConfirmationDialog.open({
+            dialogId = ConfirmationDialog.open({
               title: 'Configure categories',
               template: {
                 template: template,
@@ -121,14 +123,49 @@
               showX: true,
               width: 256,
               buttons: [
-                { label: 'Save' },
+                {
+                  label: 'Save',
+                  callback: setDisabledCategories
+                },
                 { label: 'Cancel' }
               ]
             });
           }
 
+          function setDisabledCategories(){
+            var showErrorDialog = function(){
+              ConfirmationDialog.open({
+                title: 'Error',
+                showX: true,
+                content: 'Could not save disabled categories'
+              });
+            };
+
+            var categories = self.categoriesForConfig.filter(function(cat){
+              return cat.checked === false;
+            }).map(function(cat){
+              return cat.name
+            }).join('|');
+            Server.setDisabledCategories(categories).then(
+              function(response){
+                response = response.plain();
+                if(response.data.error){
+                  showErrorDialog();
+                }else{
+                  self.disabledCategories = categories;
+                }
+              },
+              function(response){
+                showErrorDialog();
+                LogService.error(response.plain());
+              }
+            ).finally(function(){
+                ConfirmationDialog.close(dialogId);
+              });
+          }
+
           EventsService.subscribe('sn-login', $scope, function(e, userProfile){
-            self.disabledCategories = userProfile.disabled_categories.split(',');
+            self.disabledCategories = userProfile.disabled_categories.split('|');
             getFiltersFromServer();
           });
 

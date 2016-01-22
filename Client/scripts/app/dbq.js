@@ -7,7 +7,7 @@
 
     function allArticles(){
       return "select * from articles order by id desc";
-    };
+    }
 
     function allCategories(){
       return "select count() as hits,category as name from articles group by name order by name";
