@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Models.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -56,6 +57,7 @@ namespace Server.Models
             {
                 var sqlDelete = "delete from user_info where user_id = " + userId;
                 var sqlInsert = "insert into user_info (user_id, disabled_filters) values (" + userId + ", '" + disabledCategories + "')";
+
                 using (var connection = Db.getConnection("users"))
                 {
                     connection.Open();
@@ -70,7 +72,40 @@ namespace Server.Models
                 }                
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool SetWPs(int userId, List<UserWordpressTableModel> wps)
+        {
+            try
+            {
+                var sqlDelete = "delete from user_wordpress where user_id = " + userId;
+                var sqlInsert = "insert into user_wordpress (user_id,wp_name,wp_url,wp_auth_type,wp_auth_token) values ";
+                List<string> values = new List<string>();
+                foreach (var model in wps)
+                {
+                    values.Add("(" + userId + ",'" + model.wp_name + "','" + model.wp_url + "','" + model.wp_auth_type + "','" + model.wp_auth_token + "')");
+                }
+                sqlInsert += string.Join(",", values.ToArray());
+
+                using (var connection = Db.getConnection("users"))
+                {
+                    connection.Open();
+                    using (var cmdDelete = new SQLiteCommand(sqlDelete, connection))
+                    {
+                        cmdDelete.ExecuteNonQuery();
+                    }
+                    using (var cmdInsert = new SQLiteCommand(sqlInsert, connection))
+                    {
+                        cmdInsert.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
             {
                 return false;
             }

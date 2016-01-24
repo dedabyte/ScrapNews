@@ -62,6 +62,10 @@
       return ServerRest.one('SetUserDisabledCategories').post(null, { categories: categories });
     };
 
+    this.setWPs = function(jsonWPs){
+      return ServerRest.one('SetUserWPs').post(null, { jsonWPs: jsonWPs });
+    };
+
     this.wpimage = function(url, wpConfiguration){
       var wpRest = WPRest.getRest(wpConfiguration);
       return ServerRest.one('GetImage')

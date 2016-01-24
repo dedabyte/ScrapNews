@@ -6,6 +6,8 @@ using System.Net;
 using System.Web.Mvc;
 using Server.Models;
 using Server.Models.Filters;
+using Newtonsoft.Json;
+using Server.Models.Classes;
 
 namespace Server.Controllers
 {
@@ -214,6 +216,13 @@ namespace Server.Controllers
         public JsonNetResult SetUserDisabledCategories(string categories)
         {
             return new JsonNetResult { Data = new Response { data = UserData.SetDisabledCategories(UserId, categories) } };
+        }
+
+        [AuthAjaxFilter]
+        public JsonNetResult SetUserWPs(string jsonWPs)
+        {
+            var wps = JsonConvert.DeserializeObject<List<UserWordpressTableModel>>(jsonWPs);
+            return new JsonNetResult { Data = new Response { data = UserData.SetWPs(UserId, wps) } };
         }
     }
 }

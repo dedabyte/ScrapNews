@@ -6,7 +6,7 @@
 
   angular
     .module('app')
-    .directive(componentName, function(Server, EventsService, ConfirmationDialog){
+    .directive(componentName, function(Server, EventsService, ConfirmationDialog, LogService){
       //var $content = $('#_content');
 
       return {
@@ -89,10 +89,33 @@
           }
 
           function setWps(){
+            var showErrorDialog = function(){
+              ConfirmationDialog.open({
+                title: 'Error',
+                showX: true,
+                content: 'Could not save wordpress configuration'
+              });
+            };
+
             var configWps = self.configWps.filter(function(wp){
               return (wp.wp_name && wp.wp_url && wp.wp_auth_type && wp.wp_auth_token);
             });
-            console.log(configWps);
+            Server.setWPs(angular.toJson(configWps)).then(
+              function(response){
+                response = response.plain();
+                if(response.data.error){
+                  showErrorDialog();
+                }else{
+                  self.wps = configWps;
+                  convertWpUrlToApi();
+                  ConfirmationDialog.close(dialogId);
+                }
+              },
+              function(response){
+                showErrorDialog();
+                LogService.error(response.plain());
+              }
+            );
           }
 
           function addEmptyConfigWp(){

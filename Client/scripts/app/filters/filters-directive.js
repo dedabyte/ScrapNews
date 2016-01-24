@@ -152,15 +152,14 @@
                   showErrorDialog();
                 }else{
                   self.disabledCategories = categories;
+                  ConfirmationDialog.close(dialogId);
                 }
               },
               function(response){
                 showErrorDialog();
                 LogService.error(response.plain());
               }
-            ).finally(function(){
-                ConfirmationDialog.close(dialogId);
-              });
+            );
           }
 
           EventsService.subscribe('sn-login', $scope, function(e, userProfile){

@@ -130,6 +130,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Auth.cs" />
+    <Compile Include="Models\Classes\UserWordpressTableModel.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Db.cs" />
     <Compile Include="Models\Filters\AuthAjaxFilter.cs" />
