@@ -92,6 +92,11 @@
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         });
     };
+
+    this.wpGetPosts = function(wpConfiguration){
+      var wpRest = WPRest.getRest(wpConfiguration);
+      return wpRest.one('posts').get();
+    }
   }
 
 })();

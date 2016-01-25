@@ -105,6 +105,14 @@
             return self.disabledCategories.indexOf(cat.name) > -1;
           }
 
+          EventsService.subscribe('sn-login', $scope, function(e, userProfile){
+            self.disabledCategories = userProfile.disabled_categories.split('|');
+            getFiltersFromServer();
+          });
+
+
+          /* FILTERS CONFIGURATION */
+
           function openConfigDialog(){
             self.categoriesForConfig = angular.copy(self.categories);
             self.categoriesForConfig.forEach(function(cat){
@@ -161,11 +169,6 @@
               }
             );
           }
-
-          EventsService.subscribe('sn-login', $scope, function(e, userProfile){
-            self.disabledCategories = userProfile.disabled_categories.split('|');
-            getFiltersFromServer();
-          });
 
           self.changePublisher = changePublisher;
           self.changeCategory = changeCategory;

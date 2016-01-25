@@ -17,6 +17,7 @@
           var dialogId;
 
           self.article = null;
+          self.selectedWP = null;
 
           EventsService.subscribe('sn-filters', $scope, function(){
             self.article = null;
@@ -26,10 +27,51 @@
             self.article = article;
           });
 
-          function post(wpConfig){
+          function selectWP(wp){
+            self.selectedWP = wp;
+            self.selectedWP.postData = self.selectedWP.postData || { status: 100 };
+            if(wp.postData.status > 2){
+              wp.postData.status = 100;
+            }
+            getPostsForSelectedWP(wp);
+          }
+
+          function getPostsForSelectedWP(wp){
+            if(angular.isUndefined(wp)){
+              wp = self.selectedWP;
+            }
+            wp.postData.posts = undefined;
+            Server.wpGetPosts(wp).then(
+              function(response){
+                response = response.plain();
+                response.forEach(function(post){
+                  delete post._links;
+                });
+                wp.postData.posts = response;
+              }
+            )
+          }
+
+          function displayPostingStatus(){
+            var postingStatuses = {
+              '100': '',
+              '1': 'Uploading image...',
+              '2': 'Posting...',
+              '3': 'Success!'
+            };
+            if(!self.selectedWP || !self.selectedWP.postData || !postingStatuses.hasOwnProperty(self.selectedWP.postData.status)){
+              return '';
+            }
+            return postingStatuses[self.selectedWP.postData.status];
+          }
+
+          function post(){
+            var wpConfig = self.selectedWP;
+            wpConfig.postData.status = 1;
             Server
               .wpimage(self.article.image_original_url || self.article.image_rss_original_url, wpConfig)
               .then(function(image){
+                wpConfig.postData.status = 2;
                 var postConfig = {
                   title: self.article.title,
                   status: 'publish',
@@ -39,8 +81,10 @@
                 Server.wppost(postConfig, wpConfig).
                   then(function(response){
                     if(response.id){
-                      console.log(response.plain());
-                      alert('Post successful with ID: ' + response.id);
+                      wpConfig.postData.status = 3;
+                    }
+                    if(wpConfig === self.selectedWP){
+                      getPostsForSelectedWP();
                     }
                   });
               });
@@ -56,6 +100,14 @@
 
             return $content.html();
           }
+
+          EventsService.subscribe('sn-login', $scope, function(e, userProfile){
+            self.wps = userProfile.wps;
+          });
+
+
+
+          /* WP CONFIGURATION */
 
           function openConfigDialog(){
             self.configWps = angular.copy(self.wps);
@@ -142,11 +194,10 @@
             });
           }
 
-          EventsService.subscribe('sn-login', $scope, function(e, userProfile){
-            self.wps = userProfile.wps;
-          });
-
           self.post = post;
+          self.displayPostingStatus = displayPostingStatus;
+          self.selectWP = selectWP;
+
           self.openConfigDialog = openConfigDialog;
           self.addEmptyConfigWp = addEmptyConfigWp;
           self.removeConfigWp = removeConfigWp;
