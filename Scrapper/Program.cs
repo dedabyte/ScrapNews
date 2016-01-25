@@ -6,35 +6,23 @@ using System.Xml;
 using AngleSharp;
 using AngleSharp.Parser.Html;
 using NewsScraper.Model;
-using System.Net;
-using AngleSharp.Dom.Html;
-using System.Text;
+using AngleSharp.Dom;
+using System.Threading.Tasks;
 
 namespace NewsScraper
 {
     static class Program
     {
 
-        public static string getHtml(string url, PageModel pageModel)
-        {
-            string html;
-            using (WebClient client = new WebClient())
-            {
-                var htmlData = client.DownloadData(url);
-                html = Encoding.GetEncoding(pageModel.Encoding).GetString(htmlData);
-            }
-            return html;
-        }
-
-        public static void getArticle(RssModel rssModel, PageModel pageModel)
+        public static async void getArticle(RssModel rssModel, PageModel pageModel)
         {
             try
             {
-                //var config = Configuration.Default.WithDefaultLoader();
-                //var document = await BrowsingContext.New(config).OpenAsync(rssModel.Link);
+                var config = Configuration.Default.WithDefaultLoader();
+                var document = await BrowsingContext.New(config).OpenAsync(rssModel.Link);
 
-                var parser = new HtmlParser();
-                var document = parser.Parse(getHtml(rssModel.Link, pageModel));
+                //var parser = new HtmlParser();
+                //var document = parser.Parse(getHtml(rssModel.Link, pageModel));
 
                 if (document.QuerySelectorAll(pageModel.SkipSelector).Any())
                 {
@@ -60,7 +48,7 @@ namespace NewsScraper
                 var imageOriginalUrl = jqImageOriginalUrl.Any() ? pageModel.ImagePrefix + jqImageOriginalUrl[0].GetAttribute("src").Safe() : "";
 
                 //var content = getContent(document, pageModel);
-                var content = getArticlePages(document, pageModel);
+                var content = await getArticlePages(document, pageModel);
 
                 var ts = Helpers.Timestamp();
                 
@@ -94,7 +82,7 @@ namespace NewsScraper
             }
         }
 
-        public static string getArticlePages(IHtmlDocument document, PageModel pageModel)
+        public static async Task<string> getArticlePages(IDocument document, PageModel pageModel)
         {
             var content = "";
 
@@ -102,12 +90,14 @@ namespace NewsScraper
             if (jqNextPage.Any() && !string.IsNullOrEmpty(jqNextPage[0].GetAttribute("href")))
             {
                 var url = pageModel.PagerNextUrlPrefix + jqNextPage[0].GetAttribute("href");
-                var parser = new HtmlParser();
-                var pageDocument = parser.Parse(getHtml(url, pageModel));
+                //var parser = new HtmlParser();
+                //var pageDocument = parser.Parse(getHtml(url, pageModel));
+                var config = Configuration.Default.WithDefaultLoader();
+                var pageDocument = await BrowsingContext.New(config).OpenAsync(url);
 
                 content = getContent(document, pageModel);
 
-                content += getArticlePages(pageDocument, pageModel);
+                content += await getArticlePages(pageDocument, pageModel);
             }
             else
             {
@@ -117,7 +107,7 @@ namespace NewsScraper
             return content;
         }
 
-        public static string getContent(IHtmlDocument document, PageModel pageModel)
+        public static string getContent(IDocument document, PageModel pageModel)
         {
             // find nodes for html, remove junk
             var jqContent = document.QuerySelector(pageModel.ArticleNodeSelector);
