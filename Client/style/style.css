@@ -29,7 +29,7 @@ small {
     border-color: #f70; }
 
 .app-wrapper {
-  width: 1200px;
+  width: 1170px;
   margin: 0 auto;
   border-left: 1px solid #dfdfdf;
   border-right: 1px solid #dfdfdf; }
@@ -95,7 +95,7 @@ small {
   cursor: pointer;
   padding: 3px 5px; }
   .filter-item:hover {
-    background-color: #fff1e6;
+    background-color: #fff1e5;
     color: #f70; }
   .filter-item.selected {
     background-color: #f70;
@@ -164,7 +164,7 @@ small {
     font-size: 11px;
     text-transform: uppercase; }
   .article-short:hover {
-    background-color: #fff1e6; }
+    background-color: #fff1e5; }
     .article-short:hover .article-short-title {
       color: #f70; }
   .article-short.selected {
@@ -212,7 +212,7 @@ small {
     cursor: pointer;
     padding: 3px 5px; }
     .wp-column .wp-item:hover {
-      background-color: #fff1e6;
+      background-color: #fff1e5;
       color: #f70; }
     .wp-column .wp-item.selected {
       background-color: #f70;

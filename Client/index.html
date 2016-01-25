@@ -102,6 +102,7 @@
              ng-class="{ selected: (snWpPost.selectedWP === wp) }">
           <span ng-bind="wp.wp_name"></span>
         </div>
+        <button ng-click="snWpPost.openConfigDialog()">config</button>
       </div>
 
       <div class="wp-posts">
