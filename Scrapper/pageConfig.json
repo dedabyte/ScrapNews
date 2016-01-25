@@ -12,7 +12,8 @@
     "SkipUrlRegex": "/video/",
     "Rss": [
       "http://www.b92.net/info/rss/novo.xml"
-    ]
+    ],
+    "Encoding": "windows-1250"
   },
   {
     "Publisher": "kurir",

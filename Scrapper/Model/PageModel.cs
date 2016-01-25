@@ -24,6 +24,8 @@ namespace NewsScraper.Model
         public string Publisher { get; set; }
         public List<string> Rss { get; set; }
 
+        public string Encoding { get; set; }
+
         public PageModel()
         {
             TitleSelector = "null";
@@ -44,6 +46,8 @@ namespace NewsScraper.Model
             ImagePrefix = "";
             Publisher = "unknown";
             Rss = new List<string>();
+
+            Encoding = "utf-8";
         }
 
         public Regex GetSkipUrlRegex()

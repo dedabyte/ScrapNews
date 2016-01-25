@@ -15,6 +15,17 @@ namespace NewsScraper
     static class Program
     {
 
+        public static string getHtml(string url, PageModel pageModel)
+        {
+            string html;
+            using (WebClient client = new WebClient())
+            {
+                var htmlData = client.DownloadData(url);
+                html = Encoding.GetEncoding(pageModel.Encoding).GetString(htmlData);
+            }
+            return html;
+        }
+
         public static void getArticle(RssModel rssModel, PageModel pageModel)
         {
             try
@@ -22,14 +33,8 @@ namespace NewsScraper
                 //var config = Configuration.Default.WithDefaultLoader();
                 //var document = await BrowsingContext.New(config).OpenAsync(rssModel.Link);
 
-                string htmlCode;
-                using (WebClient client = new WebClient())
-                {
-                    client.Encoding = Encoding.UTF8;
-                    htmlCode = client.DownloadString(rssModel.Link);
-                }
                 var parser = new HtmlParser();
-                var document = parser.Parse(htmlCode);
+                var document = parser.Parse(getHtml(rssModel.Link, pageModel));
 
                 if (document.QuerySelectorAll(pageModel.SkipSelector).Any())
                 {
@@ -97,14 +102,8 @@ namespace NewsScraper
             if (jqNextPage.Any() && !string.IsNullOrEmpty(jqNextPage[0].GetAttribute("href")))
             {
                 var url = pageModel.PagerNextUrlPrefix + jqNextPage[0].GetAttribute("href");
-                string htmlCode;
-                using (WebClient client = new WebClient())
-                {
-                    client.Encoding = Encoding.UTF8;
-                    htmlCode = client.DownloadString(url);
-                }
                 var parser = new HtmlParser();
-                var pageDocument = parser.Parse(htmlCode);
+                var pageDocument = parser.Parse(getHtml(url, pageModel));
 
                 content = getContent(document, pageModel);
 
