@@ -16,7 +16,10 @@ namespace NewsScraper.Model
 
         public string SkipSelector { get; set; }
         public string SkipUrlRegex { get; set; }
-        
+
+        public string PagerNextSelector { get; set; }
+        public string PagerNextUrlPrefix { get; set; }
+
         public string ImagePrefix { get; set; }
         public string Publisher { get; set; }
         public List<string> Rss { get; set; }
@@ -34,7 +37,10 @@ namespace NewsScraper.Model
             
             SkipSelector = "null";
             SkipUrlRegex = null;
-            
+
+            PagerNextSelector = "null";
+            PagerNextUrlPrefix = "";
+
             ImagePrefix = "";
             Publisher = "unknown";
             Rss = new List<string>();

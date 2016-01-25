@@ -7,13 +7,15 @@ using AngleSharp;
 using AngleSharp.Parser.Html;
 using NewsScraper.Model;
 using System.Net;
+using AngleSharp.Dom.Html;
+using System.Text;
 
 namespace NewsScraper
 {
     static class Program
     {
 
-        public static async void getArticle(RssModel rssModel, PageModel pageModel)
+        public static void getArticle(RssModel rssModel, PageModel pageModel)
         {
             try
             {
@@ -23,6 +25,7 @@ namespace NewsScraper
                 string htmlCode;
                 using (WebClient client = new WebClient())
                 {
+                    client.Encoding = Encoding.UTF8;
                     htmlCode = client.DownloadString(rssModel.Link);
                 }
                 var parser = new HtmlParser();
@@ -50,51 +53,9 @@ namespace NewsScraper
                 var title = jqTitle[0].TextContent.Safe();
                 var summary = jqSummary.Any() ? jqSummary[0].TextContent.Safe() : "";
                 var imageOriginalUrl = jqImageOriginalUrl.Any() ? pageModel.ImagePrefix + jqImageOriginalUrl[0].GetAttribute("src").Safe() : "";
-                
-                // find nodes for html, remove junk
-                var jqContent = document.QuerySelector(pageModel.ArticleNodeSelector);
-                jqContent.QuerySelectorAll(pageModel.ArticleRemoveSelector).ToList().ForEach(x => x.Remove());
-                // remove scripts
-                var allowedScripts = new []
-                {
-                    "platform.instagram.com",
-                    "platform.twitter.com"
-                };
-                foreach (var script in jqContent.QuerySelectorAll("script").ToList())
-                {
-                    var src = script.GetAttribute("src").Safe();
-                    if ( !src.Any() || (src.Any() && !allowedScripts.Any(x => src.Contains(x))) )
-                    {
-                        Console.WriteLine("     - Script blocked: " + src);
-                        script.Remove();
-                    }
-                }
 
-                // mod images
-                foreach (var element in jqContent.QuerySelectorAll("img").ToList())
-                {
-                    // remove dimensions 
-                    element.RemoveAttribute("width");
-                    element.RemoveAttribute("height");
-                    // prefix sources
-                    var src = element.GetAttribute("src").Safe();
-                    if(src.Any() && !src.StartsWith("http"))
-                    {
-                        src = pageModel.ImagePrefix + src;
-                        element.SetAttribute("src", src);
-                    }
-                }
-
-                // TODO jel treba ovo?
-                // replace anchors
-                //foreach (var element in jqContent.QuerySelectorAll("a").ToList())
-                //{
-                //    var newElement = document.CreateElement("span");
-                //    newElement.InnerHtml = element.InnerHtml;
-                //    element.Replace(newElement);
-                //}
-
-                var content = jqContent.InnerHtml.Safe();
+                //var content = getContent(document, pageModel);
+                var content = getArticlePages(document, pageModel);
 
                 var ts = Helpers.Timestamp();
                 
@@ -126,6 +87,74 @@ namespace NewsScraper
             {
                 Console.WriteLine("FAIL - " + rssModel.Link + " - " + e.Message);
             }
+        }
+
+        public static string getArticlePages(IHtmlDocument document, PageModel pageModel)
+        {
+            var content = "";
+
+            var jqNextPage = document.QuerySelectorAll(pageModel.PagerNextSelector);
+            if (jqNextPage.Any() && !string.IsNullOrEmpty(jqNextPage[0].GetAttribute("href")))
+            {
+                var url = pageModel.PagerNextUrlPrefix + jqNextPage[0].GetAttribute("href");
+                string htmlCode;
+                using (WebClient client = new WebClient())
+                {
+                    client.Encoding = Encoding.UTF8;
+                    htmlCode = client.DownloadString(url);
+                }
+                var parser = new HtmlParser();
+                var pageDocument = parser.Parse(htmlCode);
+
+                content = getContent(document, pageModel);
+
+                content += getArticlePages(pageDocument, pageModel);
+            }
+            else
+            {
+                content = getContent(document, pageModel);
+            }
+
+            return content;
+        }
+
+        public static string getContent(IHtmlDocument document, PageModel pageModel)
+        {
+            // find nodes for html, remove junk
+            var jqContent = document.QuerySelector(pageModel.ArticleNodeSelector);
+            jqContent.QuerySelectorAll(pageModel.ArticleRemoveSelector).ToList().ForEach(x => x.Remove());
+            // remove scripts
+            var allowedScripts = new[]
+            {
+                "platform.instagram.com",
+                "platform.twitter.com"
+            };
+            foreach (var script in jqContent.QuerySelectorAll("script").ToList())
+            {
+                var src = script.GetAttribute("src").Safe();
+                if (!src.Any() || (src.Any() && !allowedScripts.Any(x => src.Contains(x))))
+                {
+                    Console.WriteLine("     - Script blocked: " + src);
+                    script.Remove();
+                }
+            }
+
+            // mod images
+            foreach (var element in jqContent.QuerySelectorAll("img").ToList())
+            {
+                // remove dimensions 
+                element.RemoveAttribute("width");
+                element.RemoveAttribute("height");
+                // prefix sources
+                var src = element.GetAttribute("src").Safe();
+                if (src.Any() && !src.StartsWith("http"))
+                {
+                    src = pageModel.ImagePrefix + src;
+                    element.SetAttribute("src", src);
+                }
+            }
+
+            return jqContent.InnerHtml.Safe();
         }
 
 

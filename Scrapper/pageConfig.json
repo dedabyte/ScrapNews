@@ -76,6 +76,8 @@
     "ArticleNodeSelector": ".quiz-cont",
     "ArticleRemoveSelector": ".quiz-info,.quiz-share,.quiz-actions",
     "SkipUrlRegex": "/kviz/",
+    "PagerNextSelector": ".q-next[data-q-id]",
+    "PagerNextUrlPrefix":  "http://www.fokuzz.com",
     "Rss": [
       "http://www.fokuzz.com/rss"
     ]
