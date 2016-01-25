@@ -6,6 +6,7 @@ using System.Xml;
 using AngleSharp;
 using AngleSharp.Parser.Html;
 using NewsScraper.Model;
+using System.Net;
 
 namespace NewsScraper
 {
@@ -16,8 +17,16 @@ namespace NewsScraper
         {
             try
             {
-                var config = Configuration.Default.WithDefaultLoader();
-                var document = await BrowsingContext.New(config).OpenAsync(rssModel.Link);
+                //var config = Configuration.Default.WithDefaultLoader();
+                //var document = await BrowsingContext.New(config).OpenAsync(rssModel.Link);
+
+                string htmlCode;
+                using (WebClient client = new WebClient())
+                {
+                    htmlCode = client.DownloadString(rssModel.Link);
+                }
+                var parser = new HtmlParser();
+                var document = parser.Parse(htmlCode);
 
                 if (document.QuerySelectorAll(pageModel.SkipSelector).Any())
                 {
