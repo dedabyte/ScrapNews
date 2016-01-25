@@ -1,72 +1,83 @@
 ﻿[
-    {
-        "Publisher": "b92",
-        "CategorySelector": "article.item-page .category a, article .article-header small a",
-        "TitleSelector": "article.item-page .article-header h1",
-        "SummarySelector": "article.item-page .article-header p",
-        "ImageOriginalUrlSelector": "article.item-page .article-header img",
-        "ArticleNodeSelector": "article.item-page",
-        "ArticleRemoveSelector": ".article-header,table,.related,.banner-inText,.banners-middle,.article-footer,.content-exchange",
-        "ImagePrefix": "http://www.b92.net",
-        "SkipSelector": "article.item-page.video",
-        "SkipUrlRegex": "/video/",
-        "Rss": [
-            "http://www.b92.net/info/rss/novo.xml"
-        ]
-    },
-    {
-        "Publisher": "kurir",
-        "CategorySelector": "article.detailView .detailViewHeader .category",
-        "TitleSelector": "article.detailView .detailViewHeader h1.title",
-        "SummarySelector": "article.detailView .detailViewIntro p",
-        "ImageOriginalUrlSelector": "article.detailView .detailViewMedia img",
-        "ArticleNodeSelector": "article.detailView .detailViewContent",
-        "ArticleRemoveSelector": ".viberFollow,.marketItem",
-        "Rss": [
-            "http://www.kurir.rs/rss/najnovije-vesti/"
-        ]
-    },
-    {
-        "Publisher": "kurir stil",
-        "CategorySelector": "article.detail_view header.main_header section.meta > p:first-child strong",
-        "TitleSelector": "article.detail_view header.main_header h1",
-        "SummarySelector": "article.detail_view header.main_header hgroup p",
-        "ImageOriginalUrlSelector": "article.detail_view figure.main_figure img",
-        "ArticleNodeSelector": "article.detail_view .main_text",
-        "ArticleRemoveSelector": "em",
-        "Rss": [
-            "http://stil.kurir.rs/rss/najnovije-vesti/"
-        ]
-    },
-    {
-        "Publisher": "mens health",
-        "CategorySelector": "#content h1",
-        "TitleSelector": "#content h2",
-        "SummarySelector": "#content p.lead",
-        "ImageOriginalUrlSelector": "#content .boxImage img",
-        "ArticleNodeSelector": "#content",
-        "ArticleRemoveSelector": "h1.title,h2.title,.commentCount_eventDate,.rankingShare,p.lead,.box-plugin-img:first-child,.innerThrid,.lineBlokDivider,#votingSystem,#result,#tagRelatedSpace,#comments,iframe[src=\"http://www.adriamediacontent.com/code/menshealth/modul-hor.php\"]",
-        "ImagePrefix": "http://www.menshealth.rs",
-        "Rss": [
-            "http://menshealth.rs/fitness/rss",
-            "http://menshealth.rs/ishrana/rss",
-            "http://menshealth.rs/zdravlje/rss",
-            "http://menshealth.rs/sex/rss",
-            "http://menshealth.rs/stil/rss",
-            "http://menshealth.rs/tech/rss"
-        ]
-    },
-    {
-        "Publisher": "cosmopolitan",
-        "CategorySelector": ".box_breadcrumb a:nth-child(2)",
-        "TitleSelector": "#header_default_article h1",
-        "SummarySelector": "#article_body .article_abstract",
-        "ImageOriginalUrlSelector": "#article_body .image img",
-        "ArticleNodeSelector": "#article_body",
-        "ArticleRemoveSelector": ".image,.article_abstract,#box_video_headline_container",
-        "SkipUrlRegex": "/cosmo-seks-ordinacija/",
-        "Rss": [
-            "http://www.cosmopolitan.rs/feed/index.rss"
-        ]
-    }
+  {
+    "Publisher": "b92",
+    "CategorySelector": "article.item-page .category a, article .article-header small a",
+    "TitleSelector": "article.item-page .article-header h1",
+    "SummarySelector": "article.item-page .article-header p",
+    "ImageOriginalUrlSelector": "article.item-page .article-header img",
+    "ArticleNodeSelector": "article.item-page",
+    "ArticleRemoveSelector": ".article-header,table,.related,.banner-inText,.banners-middle,.article-footer,.content-exchange",
+    "ImagePrefix": "http://www.b92.net",
+    "SkipSelector": "article.item-page.video",
+    "SkipUrlRegex": "/video/",
+    "Rss": [
+      "http://www.b92.net/info/rss/novo.xml"
+    ]
+  },
+  {
+    "Publisher": "kurir",
+    "CategorySelector": "article.detailView .detailViewHeader .category",
+    "TitleSelector": "article.detailView .detailViewHeader h1.title",
+    "SummarySelector": "article.detailView .detailViewIntro p",
+    "ImageOriginalUrlSelector": "article.detailView .detailViewMedia img",
+    "ArticleNodeSelector": "article.detailView .detailViewContent",
+    "ArticleRemoveSelector": ".viberFollow,.marketItem",
+    "Rss": [
+      "http://www.kurir.rs/rss/najnovije-vesti/"
+    ]
+  },
+  {
+    "Publisher": "kurir stil",
+    "CategorySelector": "article.detail_view header.main_header section.meta > p:first-child strong",
+    "TitleSelector": "article.detail_view header.main_header h1",
+    "SummarySelector": "article.detail_view header.main_header hgroup p",
+    "ImageOriginalUrlSelector": "article.detail_view figure.main_figure img",
+    "ArticleNodeSelector": "article.detail_view .main_text",
+    "ArticleRemoveSelector": "em",
+    "Rss": [
+      "http://stil.kurir.rs/rss/najnovije-vesti/"
+    ]
+  },
+  {
+    "Publisher": "mens health",
+    "CategorySelector": "#content h1",
+    "TitleSelector": "#content h2",
+    "SummarySelector": "#content p.lead",
+    "ImageOriginalUrlSelector": "#content .boxImage img",
+    "ArticleNodeSelector": "#content",
+    "ArticleRemoveSelector": "h1.title,h2.title,.commentCount_eventDate,.rankingShare,p.lead,.box-plugin-img:first-child,.innerThrid,.lineBlokDivider,#votingSystem,#result,#tagRelatedSpace,#comments,iframe[src=\"http://www.adriamediacontent.com/code/menshealth/modul-hor.php\"]",
+    "ImagePrefix": "http://www.menshealth.rs",
+    "Rss": [
+      "http://menshealth.rs/fitness/rss",
+      "http://menshealth.rs/ishrana/rss",
+      "http://menshealth.rs/zdravlje/rss",
+      "http://menshealth.rs/sex/rss",
+      "http://menshealth.rs/stil/rss",
+      "http://menshealth.rs/tech/rss"
+    ]
+  },
+  {
+    "Publisher": "cosmopolitan",
+    "CategorySelector": ".box_breadcrumb a:nth-child(2)",
+    "TitleSelector": "#header_default_article h1",
+    "SummarySelector": "#article_body .article_abstract",
+    "ImageOriginalUrlSelector": "#article_body .image img",
+    "ArticleNodeSelector": "#article_body",
+    "ArticleRemoveSelector": ".image,.article_abstract,#box_video_headline_container",
+    "SkipUrlRegex": "/cosmo-seks-ordinacija/",
+    "Rss": [
+      "http://www.cosmopolitan.rs/feed/index.rss"
+    ]
+  },
+  {
+    "Publisher": "fokuzz",
+    "CategorySelector": ".quiz-header-cat",
+    "TitleSelector": ".quiz-header h1",        
+    "ArticleNodeSelector": ".quiz-cont",
+    "ArticleRemoveSelector": ".quiz-info,.quiz-share,.quiz-actions",
+    "SkipUrlRegex": "/kviz/",
+    "Rss": [
+      "http://www.fokuzz.com/rss"
+    ]
+  }
 ]
