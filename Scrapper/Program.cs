@@ -309,6 +309,9 @@ namespace NewsScraper
                 Console.WriteLine("> Warn: Could not set window size.");
             }
 
+            string[] lines = System.IO.File.ReadAllLines(@"db.txt");
+            Db.setFolder(lines[0]);
+
             var pageModels = PageConfigReader.GetConfig();
 
             foreach (var pageModel in pageModels)

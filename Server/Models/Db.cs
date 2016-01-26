@@ -11,8 +11,9 @@ namespace Server.Models
         {
             //connectionString = getConnectionString(false);
             //connectionStringReadOnly = getConnectionString(true);
-            csArticles = "Data Source=c:/test/test.sqlite;Version=3;";
-            csUsers = "Data Source=c:/test/users.sqlite;Version=3;";
+            csArticles = "Data Source=|DataDirectory|test.sqlite;Version=3;";
+            csUsers = "Data Source=|DataDirectory|users.sqlite;Version=3;";
+            
         }
 
         public static SQLiteConnection getConnection(string db, bool isReadOnly = false)

@@ -4,19 +4,27 @@ namespace NewsScraper.Model
 {
     public static class Db
     {
-        private static readonly string connectionString;
-        private static readonly string connectionStringReadOnly;
+        private static string folder;
+        private static string connectionString;
+        private static string connectionStringReadOnly;
 
         static Db()
         {
             //connectionString = getConnectionString(false);
             //connectionStringReadOnly = getConnectionString(true);
-            connectionString = "Data Source=c:/test/test.sqlite;Version=3;";
-            connectionStringReadOnly = "Data Source=c:/test/test.sqlite;Version=3;Read Only=True;";
+            //connectionString = "Data Source=c:/test/test.sqlite;Version=3;";
+            //connectionStringReadOnly = "Data Source=c:/test/test.sqlite;Version=3;Read Only=True;";
+        }
+
+        public static void setFolder(string _folder)
+        {
+            folder = _folder;
         }
 
         public static SQLiteConnection getConnection(bool isReadOnly = false)
         {
+            connectionString = "Data Source=" + folder + "/test.sqlite;Version=3;";
+            connectionStringReadOnly = "Data Source=" + folder + "/test.sqlite;Version=3;Read Only=True;";
             return isReadOnly ? new SQLiteConnection(connectionStringReadOnly) : new SQLiteConnection(connectionString);
         }
 

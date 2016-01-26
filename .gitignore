@@ -197,3 +197,4 @@ FakesAssemblies/
 
 # Webstorm .idea folder in Client app
 Client/.idea
+Server/App_Data/
