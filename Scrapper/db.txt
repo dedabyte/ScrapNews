@@ -1,1 +1,2 @@
-﻿D:/GitHub/ScrapNews/Server/App_Data
+﻿D:/Igor/Git/ScrapNews/Server/App_Data
+D:/GitHub/ScrapNews/Server/App_Data

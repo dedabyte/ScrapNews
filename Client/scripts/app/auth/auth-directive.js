@@ -6,7 +6,7 @@
 
   angular
     .module('app')
-    .directive(componentName, function(Server, Auth, LogService, $http){
+    .directive(componentName, function(){
       return {
         controllerAs: componentName,
         template:
@@ -21,7 +21,7 @@
           function login(){
             $.ajax({
               type: 'POST',
-              url: 'http://localhost:54861/api/authenticate',
+              url: window.api + '/authenticate',
               data: {
                 user: self.user,
                 pass: self.pass

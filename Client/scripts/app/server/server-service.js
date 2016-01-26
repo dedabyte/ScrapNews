@@ -6,7 +6,7 @@
     .module('app')
     .factory('ServerRest', function(Restangular){
       return Restangular.withConfig(function(RestangularConfigurer){
-        RestangularConfigurer.setBaseUrl('http://localhost:54861/api');
+        RestangularConfigurer.setBaseUrl(window.api);
         RestangularConfigurer.setDefaultHeaders({'SN-Auth': localStorage.getItem('sn-token')});
       });
     });
