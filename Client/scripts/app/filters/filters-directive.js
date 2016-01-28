@@ -23,14 +23,39 @@
           var dialogId;
 
           function getFiltersFromServer(){
-            Server.publishers().then(function(response){
-              self.publishers = response.data;
-              publishers = self.publishers;
-            });
-            Server.categories().then(function(response){
-              self.categories = response.data;
-              categories = self.categories;
-            });
+            var showErrorDialog = function(what, error){
+              ConfirmationDialog.openError('Could not get <b>' + what + '</b>. See console for more info.');
+              LogService.error(error);
+            };
+
+            Server.publishers().then(
+              function(response){
+                response = response.plain();
+                if(response.error){
+                  showErrorDialog('publishers', response);
+                }else{
+                  self.publishers = response.data;
+                  publishers = self.publishers;
+                }
+              },
+              function(error){
+                showErrorDialog('publishers', error);
+              }
+            );
+            Server.categories().then(
+              function(response){
+                response = response.plain();
+                if(response.error){
+                  showErrorDialog('publishers', response);
+                }else{
+                  self.categories = response.data;
+                  categories = self.categories;
+                }
+              },
+              function(error){
+                showErrorDialog('categories', error);
+              }
+            );
           }
 
           function changePublisher(filter, $event){
@@ -140,12 +165,9 @@
           }
 
           function setDisabledCategories(){
-            var showErrorDialog = function(){
-              ConfirmationDialog.open({
-                title: 'Error',
-                showX: true,
-                content: 'Could not save disabled categories'
-              });
+            var showErrorDialog = function(error){
+              ConfirmationDialog.openError('Could not save <b>disabled categories</b>. See console for more info.');
+              LogService.error(error);
             };
 
             var categories = self.categoriesForConfig.filter(function(cat){
@@ -156,16 +178,15 @@
             Server.setDisabledCategories(categories).then(
               function(response){
                 response = response.plain();
-                if(response.data.error){
-                  showErrorDialog();
+                if(response.error){
+                  showErrorDialog(response);
                 }else{
                   self.disabledCategories = categories;
                   ConfirmationDialog.close(dialogId);
                 }
               },
-              function(response){
-                showErrorDialog();
-                LogService.error(response.plain());
+              function(error){
+                showErrorDialog(error);
               }
             );
           }

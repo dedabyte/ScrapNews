@@ -165,7 +165,7 @@
 
           function setWps(){
             var showErrorDialog = function(){
-              ConfirmationDialog.openError('Could not save wordpress configuration. See console for more info.');
+              ConfirmationDialog.openError('Could not save <b>wordpress configuration</b>. See console for more info.');
             };
 
             var configWps = self.configWps.filter(function(wp){
