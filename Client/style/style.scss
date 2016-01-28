@@ -53,6 +53,11 @@ small {
       border-color: $color1;
     }
   }
+
+  .login-error {
+    font-size: 11px;
+    color: red;
+  }
 }
 
 .app-wrapper {
