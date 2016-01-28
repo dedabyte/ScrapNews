@@ -119,6 +119,8 @@
 
       if (config.error) {
         jqConfirmDialog.addClass('error');
+      }else {
+        jqConfirmDialog.removeClass('error');
       }
 
       // add title
@@ -310,8 +312,25 @@
       }
     }
 
+    function openError(_config){
+      if(angular.isString(_config)){
+        _config = { content: _config };
+      }
+      var config = angular.extend({
+        title: 'Error',
+        error: true,
+        showX: true,
+        buttons: [{ label: 'Close' }]
+      }, _config);
+      var dialog = new Dialog(config);
+      jqWrapper.append(dialog.elements.wrapper);
+      activeDialogs[dialog.id] = dialog;
+      return dialog.id;
+    }
+
     var factory = {
       open: open,
+      openError: openError,
       openById : openById,
       close: close,
       closeAll: closeAll,

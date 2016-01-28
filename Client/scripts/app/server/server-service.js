@@ -66,7 +66,7 @@
       return ServerRest.one('SetUserWPs').post(null, { jsonWPs: jsonWPs });
     };
 
-    this.wpimage = function(url, wpConfiguration){
+    this.wpImage = function(url, wpConfiguration){
       var wpRest = WPRest.getRest(wpConfiguration);
       return ServerRest.one('GetImage')
         .withHttpConfig({ responseType: 'blob' })
@@ -84,7 +84,7 @@
         });
     };
 
-    this.wppost = function(postConfig, wpConfiguration){
+    this.wpPost = function(postConfig, wpConfiguration){
       var wpRest = WPRest.getRest(wpConfiguration);
       return wpRest.one('posts')
         .post(null, $.param(postConfig), null, {

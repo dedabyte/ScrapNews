@@ -48,6 +48,11 @@
                   delete post._links;
                 });
                 wp.postData.posts = response;
+              },
+              function(error){
+                LogService.error(error);
+                ConfirmationDialog.openError('Error while getting WP data for <b>' + wp.wp_name + '</b>. See console for more info.');
+                self.selectedWP = null;
               }
             )
           }
@@ -69,25 +74,43 @@
             var wpConfig = self.selectedWP;
             wpConfig.postData.status = 1;
             Server
-              .wpimage(self.article.image_original_url || self.article.image_rss_original_url, wpConfig)
-              .then(function(image){
-                wpConfig.postData.status = 2;
-                var postConfig = {
-                  title: self.article.title,
-                  status: 'publish',
-                  content: createContent(image, self.article),
-                  featured_image: image.id
-                };
-                Server.wppost(postConfig, wpConfig).
-                  then(function(response){
-                    if(response.id){
-                      wpConfig.postData.status = 3;
-                    }
-                    if(wpConfig === self.selectedWP){
-                      getPostsForSelectedWP();
-                    }
-                  });
-              });
+              .wpImage(self.article.image_original_url || self.article.image_rss_original_url, wpConfig)
+              .then(
+                // wpImage OK
+                function(image){
+                  wpConfig.postData.status = 2;
+                  var postConfig = {
+                    title: self.article.title,
+                    status: 'publish',
+                    content: createContent(image, self.article),
+                    featured_image: image.id
+                  };
+                  Server.wpPost(postConfig, wpConfig).
+                    then(
+                      // wpPost OK
+                      function(response){
+                        if(response.id){
+                          wpConfig.postData.status = 3;
+                        }
+                        if(wpConfig === self.selectedWP){
+                          getPostsForSelectedWP();
+                        }
+                      },
+                      // wpPost ERROR
+                      function(error){
+                        wpConfig.postData.status = 100;
+                        LogService.error(error);
+                        ConfirmationDialog.openError('Could not create post in <b>' + wpConfig.wp_name + '</b>. See console for more info.');
+                      }
+                    );
+                },
+                // wpImage ERROR
+                function(error){
+                  wpConfig.postData.status = 100;
+                  LogService.error(error);
+                  ConfirmationDialog.openError('Could not upload feature image to <b>' + wpConfig.wp_name + '</b>. See console for more info.');
+                }
+              );
           }
 
           function createContent(image, article){
@@ -142,11 +165,7 @@
 
           function setWps(){
             var showErrorDialog = function(){
-              ConfirmationDialog.open({
-                title: 'Error',
-                showX: true,
-                content: 'Could not save wordpress configuration'
-              });
+              ConfirmationDialog.openError('Could not save wordpress configuration. See console for more info.');
             };
 
             var configWps = self.configWps.filter(function(wp){
@@ -165,7 +184,7 @@
               },
               function(response){
                 showErrorDialog();
-                LogService.error(response.plain());
+                LogService.error(response);
               }
             );
           }
