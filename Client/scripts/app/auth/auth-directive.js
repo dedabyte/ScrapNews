@@ -16,7 +16,7 @@
           '<p class="login-error" ng-bind="snAuth.errorMessage" ng-show="snAuth.errorMessage"></p>' +
           '<p><button type="submit" ng-disabled="!snAuth.user || !snAuth.pass">Login</button></p>' +
           '</form>',
-        controller: function($scope){
+        controller: function($scope, LogService){
           var self = this;
 
           self.errorMessage = '';
@@ -31,7 +31,7 @@
               },
               success: function (response) {
                 if (response.error) {
-                  console.error(response.message);
+                  LogService.error(response.message);
                   $scope.$evalAsync(function(){
                     self.errorMessage = response.message;
                   });
@@ -42,7 +42,7 @@
                 location.reload(true);
               },
               error: function(error){
-                console.error(error);
+                LogService.error(error);
                 $scope.$evalAsync(function(){
                   self.errorMessage = 'Error. See console for more info.';
                 });
