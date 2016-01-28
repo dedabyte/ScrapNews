@@ -76,21 +76,36 @@
           var filename = url.split('/').pop();
           imageData.append('file', new File([response], filename));
 
-          return wpRest.one('media')
-            .post(null, imageData, null, {
-              'Authorization': wpConfiguration.wp_auth_token,
-              'Content-Type': undefined
-            });
+          if(wpConfiguration.wp_auth_type === 'basic'){
+            return wpRest.one('media')
+              .post(null, imageData, null, {
+                'Authorization': wpConfiguration.wp_auth_token,
+                'Content-Type': undefined
+              });
+          }else{
+            return wpRest.one('media')
+              .post(null, imageData, { access_token: wpConfiguration.wp_auth_token }, {
+                'Content-Type': undefined
+              });
+          }
         });
     };
 
     this.wppost = function(postConfig, wpConfiguration){
       var wpRest = WPRest.getRest(wpConfiguration);
-      return wpRest.one('posts')
-        .post(null, $.param(postConfig), null, {
-          'Authorization': wpConfiguration.wp_auth_token,
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        });
+
+      if(wpConfiguration.wp_auth_type === 'basic'){
+        return wpRest.one('posts')
+          .post(null, $.param(postConfig), null, {
+            'Authorization': wpConfiguration.wp_auth_token,
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          });
+      }else{
+        return wpRest.one('posts')
+          .post(null, $.param(postConfig), { access_token: wpConfiguration.wp_auth_token }, {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          });
+      }
     };
 
     this.wpGetPosts = function(wpConfiguration){
