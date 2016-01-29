@@ -75,7 +75,7 @@
     "CategorySelector": ".quiz-header-cat",
     "TitleSelector": ".quiz-header h1",        
     "ArticleNodeSelector": ".quiz-cont",
-    "ArticleRemoveSelector": ".quiz-info,.quiz-share,.quiz-actions",
+    "ArticleRemoveSelector": ".quiz-info,.quiz-share,.quiz-actions,.q-pagin-video",
     "SkipUrlRegex": "/kviz/",
     "PagerNextSelector": ".q-next[data-q-id]",
     "PagerNextUrlPrefix":  "http://www.fokuzz.com",
