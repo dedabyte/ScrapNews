@@ -11,7 +11,6 @@ namespace NewsScraper.Model
         public string ImageOriginalUrlSelector { get; set; }
         
         public string ArticleNodeSelector { get; set; }
-        public string ArticleContentSelector { get; set; }
         public string ArticleRemoveSelector { get; set; }
 
         public string SkipSelector { get; set; }
@@ -34,7 +33,6 @@ namespace NewsScraper.Model
             ImageOriginalUrlSelector = "null";
 
             ArticleNodeSelector = "null";
-            ArticleContentSelector = "null";
             ArticleRemoveSelector = "null";
             
             SkipSelector = "null";

@@ -1,0 +1,13 @@
+﻿[
+  {
+    "Publisher": "elle",
+    "CategorySelector": ".page > p a:nth-child(3)",
+    "TitleSelector": ".page h1",
+    "SummarySelector":  ".article_abstract",
+    "ArticleNodeSelector": ".page > div.span_12_of_12:not(.social_cont)",
+    "ArticleRemoveSelector": ".color_red,#page_gallery_holder",
+    "Rss": [
+      "http://www.elle.rs/feed/index.rss"
+    ]
+  }
+]
