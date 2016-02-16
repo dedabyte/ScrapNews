@@ -13,7 +13,11 @@ scrapper .app-wrapper {
   margin: 0;
   padding: 0;
   font-family: "Ubuntu", Arial, sans-serif !important;
-  color: #444; }
+  color: #444;
+  width: 1170px;
+  margin: 0 auto;
+  border-left: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf; }
 scrapper p, scrapper h1, scrapper h2, scrapper h3, scrapper h4, scrapper h5, scrapper h6 {
   margin: 0; }
 scrapper small {
@@ -33,11 +37,6 @@ scrapper .login-form input {
 scrapper .login-form .login-error {
   font-size: 11px;
   color: red; }
-scrapper .app-wrapper {
-  width: 1170px;
-  margin: 0 auto;
-  border-left: 1px solid #dfdfdf;
-  border-right: 1px solid #dfdfdf; }
 scrapper .app-title-row {
   overflow: auto; }
 scrapper .app-title {

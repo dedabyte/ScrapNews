@@ -9,6 +9,7 @@
     .directive(componentName, function(Server, EventsService, LogService, ConfirmationDialog){
       return {
         controllerAs: componentName,
+        /** @ngInject */
         controller: function($scope){
           var self = this;
           // for cache

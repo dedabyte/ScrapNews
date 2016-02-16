@@ -16,6 +16,7 @@
           '<p class="login-error" ng-bind="snAuth.errorMessage" ng-show="snAuth.errorMessage"></p>' +
           '<p><button type="submit" ng-disabled="!snAuth.user || !snAuth.pass">Login</button></p>' +
           '</form>',
+        /** @ngInject */
         controller: function($scope, LogService){
           var self = this;
 

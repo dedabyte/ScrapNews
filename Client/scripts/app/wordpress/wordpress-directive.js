@@ -11,6 +11,7 @@
 
       return {
         controllerAs: componentName,
+        /** @ngInject */
         controller: function($scope){
           var self = this;
 

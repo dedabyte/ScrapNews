@@ -33,6 +33,10 @@ scrapper {
     padding: 0;
     font-family: $fontFamily;
     color: $colorFont1;
+    width: 1170px;
+    margin: 0 auto;
+    border-left: 1px solid $colorBorder;
+    border-right: 1px solid $colorBorder;
   }
 
   p, h1, h2, h3, h4, h5, h6 {
@@ -69,13 +73,6 @@ scrapper {
       font-size: 11px;
       color: red;
     }
-  }
-
-  .app-wrapper {
-    width: 1170px;
-    margin: 0 auto;
-    border-left: 1px solid $colorBorder;
-    border-right: 1px solid $colorBorder;
   }
 
   .app-title-row {
