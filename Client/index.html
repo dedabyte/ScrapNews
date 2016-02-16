@@ -5,8 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>News</title>
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,700&subset=latin,latin-ext" rel="stylesheet"
-        type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,300,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   <link href="style/style.css" rel="stylesheet" type="text/css">
 
   <script src="scripts/lib/lodash.min.js"></script>
@@ -34,9 +33,7 @@
           <div class="filters-column-group-title">Publishers</div>
           <div class="filter-item" ng-repeat="filter in snFilters.publishers" ng-class="{ selected: filter.selected }"
                ng-click="snFilters.changePublisher(filter, $event)">
-            <span ng-bind=":: filter.name"></span> (
-            <small ng-bind=":: filter.hits"></small>
-            )
+            <span ng-bind=":: filter.name"></span> (<small ng-bind=":: filter.hits"></small>)
           </div>
         </div>
         <div class="filters-column-group">
@@ -48,9 +45,7 @@
           <div class="filter-item" ng-repeat="filter in snFilters.categories | filter:snFilters.filterCategories"
                ng-class="{ selected: filter.selected }"
                ng-click="snFilters.changeCategory(filter, $event)" ng-hide="snFilters.isCategoryDisabled(filter)">
-            <span ng-bind=":: filter.name"></span> (
-            <small ng-bind="snFilters.getHitsForCategory(filter)"></small>
-            )
+            <span ng-bind=":: filter.name"></span> (<small ng-bind="snFilters.getHitsForCategory(filter)"></small>)
           </div>
         </div>
       </div>
@@ -120,9 +115,7 @@
         <div class="wp-posts">
           <div class="wp-posts-toolbar">
             <button ng-click="snWpPost.post()"
-                    ng-disabled="snWpPost.article === null || snWpPost.selectedWP === null || snWpPost.selectedWP.postData.status < 3">
-              post
-            </button>
+                    ng-disabled="snWpPost.article === null || snWpPost.selectedWP === null || snWpPost.selectedWP.postData.status < 3">post</button>
             <span ng-bind="snWpPost.displayPostingStatus()"></span>
           </div>
           <div class="wp-posts-all">
@@ -137,9 +130,7 @@
             <div class="empty-column" ng-show="!snWpPost.selectedWP">
               <div>Select WP to see previous posts</div>
             </div>
-            <div class="wp-posts-getting" ng-show="snWpPost.selectedWP && !snWpPost.selectedWP.postData.posts">Getting
-              WP data...
-            </div>
+            <div class="wp-posts-getting" ng-show="snWpPost.selectedWP && !snWpPost.selectedWP.postData.posts">Getting WP data...</div>
           </div>
         </div>
 

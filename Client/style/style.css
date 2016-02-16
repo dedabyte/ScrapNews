@@ -1,11 +1,13 @@
-html, body, .app-wrapper {
+html, body {
   position: relative;
   margin: 0;
   padding: 0; }
 
 scrapper * {
   box-sizing: border-box;
-  font-size: 13px; }
+  font-size: 13px;
+  outline: none;
+  line-height: normal; }
 scrapper .app-wrapper {
   position: relative;
   margin: 0;
