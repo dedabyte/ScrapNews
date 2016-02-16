@@ -5,7 +5,7 @@
   var componentName = 'snArticles';
 
   angular
-    .module('app')
+    .module('scrapper')
     .directive(componentName, function(Server, EventsService){
       return {
         controllerAs: componentName,

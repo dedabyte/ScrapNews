@@ -5,7 +5,7 @@
   var componentName = 'snPreview';
 
   angular
-    .module('app')
+    .module('scrapper')
     .directive(componentName, function(EventsService, $sce){
       return {
         controllerAs: componentName,

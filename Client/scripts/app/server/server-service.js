@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('scrapper')
     .factory('ServerRest', function(Restangular){
       return Restangular.withConfig(function(RestangularConfigurer){
         RestangularConfigurer.setBaseUrl(window.api);
@@ -12,7 +12,7 @@
     });
 
   //angular
-  //    .module('app')
+  //    .module('scrapper')
   //    .factory('WPRest', function (Restangular) {
   //        return Restangular.withConfig(function (RestangularConfigurer) {
   //            RestangularConfigurer.setBaseUrl('http://www.nighttrainns.info/wp-json/wp/v2');
@@ -20,7 +20,7 @@
   //    });
 
   angular
-    .module('app')
+    .module('scrapper')
     .service('WPRest', function(Restangular){
       this.getRest = function(wpConfiguration){
         return Restangular.withConfig(function(RestangularConfigurer){
@@ -30,7 +30,7 @@
     });
 
   angular
-    .module('app')
+    .module('scrapper')
     .service('Server', Server);
 
   function Server(ServerRest, WPRest){

@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('scrapper')
     .service('Auth', Auth);
 
   function Auth(Server, LogService, EventsService, ConfirmationDialog, $rootScope, $compile){

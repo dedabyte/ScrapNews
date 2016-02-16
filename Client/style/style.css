@@ -1,46 +1,44 @@
-* {
+html, body, .app-wrapper {
+  position: relative;
+  margin: 0;
+  padding: 0; }
+
+scrapper * {
   box-sizing: border-box;
   font-size: 13px; }
-
-html, body, .app-wrapper {
+scrapper .app-wrapper {
   position: relative;
   margin: 0;
   padding: 0;
   font-family: "Ubuntu", Arial, sans-serif !important;
   color: #444; }
-
-p, h1, h2, h3, h4, h5, h6 {
+scrapper p, scrapper h1, scrapper h2, scrapper h3, scrapper h4, scrapper h5, scrapper h6 {
   margin: 0; }
-
-small {
+scrapper small {
   font-size: smaller; }
-
-.login-form p {
+scrapper .login-form p {
   margin: 12px 0; }
-  .login-form p:last-child {
+  scrapper .login-form p:last-child {
     text-align: right; }
-.login-form input {
+scrapper .login-form input {
   outline: none;
   width: 100%;
   border: none;
   border-bottom: 1px solid #dfdfdf;
   padding: 2px 4px; }
-  .login-form input:focus {
+  scrapper .login-form input:focus {
     border-color: #f70; }
-.login-form .login-error {
+scrapper .login-form .login-error {
   font-size: 11px;
   color: red; }
-
-.app-wrapper {
+scrapper .app-wrapper {
   width: 1170px;
   margin: 0 auto;
   border-left: 1px solid #dfdfdf;
   border-right: 1px solid #dfdfdf; }
-
-.app-title-row {
+scrapper .app-title-row {
   overflow: auto; }
-
-.app-title {
+scrapper .app-title {
   float: left;
   padding: 0 5px;
   height: 36px;
@@ -49,83 +47,73 @@ small {
   color: #fff;
   font-weight: bold;
   text-transform: uppercase; }
-  .app-title.title-filters-column {
+  scrapper .app-title.title-filters-column {
     width: 180px; }
-  .app-title.title-articles-column {
+  scrapper .app-title.title-articles-column {
     width: 380px; }
-  .app-title.title-preview-column {
+  scrapper .app-title.title-preview-column {
     width: calc(100% - 180px - 380px); }
-  .app-title.title-wp-column {
+  scrapper .app-title.title-wp-column {
     width: 100%; }
-
-.app-row {
+scrapper .app-row {
   height: 500px;
   position: relative;
   border-bottom: 1px solid #dfdfdf; }
-
-.app-column {
+scrapper .app-column {
   position: relative;
   float: left;
   height: 100%;
   border-right: 1px solid #dfdfdf;
   overflow: auto; }
-
-.empty-column {
+scrapper .empty-column {
   height: 100%;
   width: 100%;
   display: table; }
-  .empty-column div {
+  scrapper .empty-column div {
     display: table-cell;
     text-align: center;
     color: #777;
     vertical-align: middle; }
-
-.filters-column {
+scrapper .filters-column {
   width: 180px; }
-
-.filters-column-group {
+scrapper .filters-column-group {
   padding: 0 0 20px; }
-
-.filters-column-group-title {
+scrapper .filters-column-group-title {
   text-transform: uppercase;
   background-color: #777;
   color: #fff;
   font-weight: bold;
   padding: 6px 5px;
   margin-bottom: 3px; }
-
-.filter-item {
+scrapper .filter-item {
   cursor: pointer;
   padding: 3px 5px; }
-  .filter-item:hover {
+  scrapper .filter-item:hover {
     background-color: #fff1e6;
     color: #f70; }
-  .filter-item.selected {
+  scrapper .filter-item.selected {
     background-color: #f70;
     color: #fff; }
-
-.filters-config-button {
+scrapper .filters-config-button {
   float: right;
   cursor: pointer;
   margin-top: 2px; }
-  .filters-config-button:hover {
+  scrapper .filters-config-button:hover {
     text-decoration: underline; }
-
-.filters-config-p {
+scrapper .filters-config-p {
   margin: 2px 0; }
-  .filters-config-p input[type=checkbox] {
+  scrapper .filters-config-p input[type=checkbox] {
     vertical-align: top;
     width: 15px;
     height: 15px;
     margin-right: 8px;
     margin-top: 0px; }
-
-.filters-column-filter {
+scrapper .filters-column-filter {
   position: relative;
   border-bottom: 1px solid #dfdfdf;
   height: 26px;
   margin-bottom: 6px; }
-  .filters-column-filter input {
+  scrapper .filters-column-filter input {
     border: none;
     outline: none;
     margin: 0;
@@ -133,18 +121,16 @@ small {
     width: 100%;
     height: 100%;
     color: #777; }
-
-.articles-column {
+scrapper .articles-column {
   width: 380px; }
-
-.article-short {
+scrapper .article-short {
   cursor: pointer;
   position: relative;
   padding: 5px;
   border-bottom: 1px solid #dfdfdf;
   min-height: 100px;
   overflow: auto; }
-  .article-short .article-short-image {
+  scrapper .article-short .article-short-image {
     position: absolute;
     top: 5px;
     left: 5px;
@@ -153,125 +139,121 @@ small {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; }
-  .article-short .article-short-data {
+  scrapper .article-short .article-short-data {
     margin-left: 100px; }
-  .article-short .article-short-title {
+  scrapper .article-short .article-short-title {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
     margin-top: 2px; }
-  .article-short .article-short-summary {
+  scrapper .article-short .article-short-summary {
     font-size: 12px;
     margin-bottom: 8px; }
-  .article-short .article-short-meta {
+  scrapper .article-short .article-short-meta {
     font-size: 11px;
     text-transform: uppercase; }
-  .article-short:hover {
+  scrapper .article-short:hover {
     background-color: #fff1e6; }
-    .article-short:hover .article-short-title {
+    scrapper .article-short:hover .article-short-title {
       color: #f70; }
-  .article-short.selected {
+  scrapper .article-short.selected {
     background-color: #f70;
     color: #fff; }
-    .article-short.selected .article-short-title {
+    scrapper .article-short.selected .article-short-title {
       color: #fff; }
-
-.preview-column {
+scrapper .preview-column {
   padding: 10px;
   width: calc(100% - 180px - 380px);
   border-right: none; }
-  .preview-column .m-bot {
+  scrapper .preview-column .m-bot {
     margin-bottom: 15px; }
-  .preview-column .preview-column-meta {
+  scrapper .preview-column .preview-column-meta {
     font-size: 11px;
     text-transform: uppercase;
     color: #777;
     border-bottom: 1px solid #dfdfdf;
     padding-bottom: 10px; }
-    .preview-column .preview-column-meta a, .preview-column .preview-column-meta a:visited {
+    scrapper .preview-column .preview-column-meta a, scrapper .preview-column .preview-column-meta a:visited {
       text-decortion: underline;
       color: #777; }
-    .preview-column .preview-column-meta a:hover {
+    scrapper .preview-column .preview-column-meta a:hover {
       color: #f70; }
-  .preview-column .preview-column-title {
+  scrapper .preview-column .preview-column-title {
     font-size: 18px;
     font-weight: bold; }
-  .preview-column .preview-column-content {
+  scrapper .preview-column .preview-column-content {
     text-align: justify; }
-    .preview-column .preview-column-content img {
+    scrapper .preview-column .preview-column-content img {
       max-width: 100%; }
-    .preview-column .preview-column-content p {
+    scrapper .preview-column .preview-column-content p {
       margin: 10px 0; }
-
-.wp-column {
+scrapper .wp-column {
   float: none;
   border-right: none; }
-  .wp-column .wp-items {
+  scrapper .wp-column .wp-items {
     width: 180px;
     float: left;
     height: 100%;
     border-right: 1px solid #dfdfdf; }
-  .wp-column .wp-item {
+  scrapper .wp-column .wp-item {
     cursor: pointer;
     padding: 3px 5px; }
-    .wp-column .wp-item:hover {
+    scrapper .wp-column .wp-item:hover {
       background-color: #fff1e6;
       color: #f70; }
-    .wp-column .wp-item.selected {
+    scrapper .wp-column .wp-item.selected {
       background-color: #f70;
       color: #fff; }
-  .wp-column .wp-posts {
+  scrapper .wp-column .wp-posts {
     width: calc(100% - 180px);
     float: left;
     height: 100%; }
-    .wp-column .wp-posts .wp-posts-toolbar {
+    scrapper .wp-column .wp-posts .wp-posts-toolbar {
       padding: 0 5px;
       height: 30px;
       line-height: 30px;
       border-bottom: 1px solid #dfdfdf; }
-    .wp-column .wp-posts .wp-posts-all {
+    scrapper .wp-column .wp-posts .wp-posts-all {
       height: calc(100% - 30px);
       overflow: auto; }
-      .wp-column .wp-posts .wp-posts-all .wp-posts-post {
+      scrapper .wp-column .wp-posts .wp-posts-all .wp-posts-post {
         padding: 3px 5px;
         border-bottom: 1px dashed #dfdfdf; }
-        .wp-column .wp-posts .wp-posts-all .wp-posts-post a, .wp-column .wp-posts .wp-posts-all .wp-posts-post a:visited, .wp-column .wp-posts .wp-posts-all .wp-posts-post a:active {
+        scrapper .wp-column .wp-posts .wp-posts-all .wp-posts-post a, scrapper .wp-column .wp-posts .wp-posts-all .wp-posts-post a:visited, scrapper .wp-column .wp-posts .wp-posts-all .wp-posts-post a:active {
           color: #777;
           text-decoration: none; }
-        .wp-column .wp-posts .wp-posts-all .wp-posts-post a:hover {
+        scrapper .wp-column .wp-posts .wp-posts-all .wp-posts-post a:hover {
           color: #f70;
           text-decoration: underline; }
-      .wp-column .wp-posts .wp-posts-all .wp-posts-getting {
+      scrapper .wp-column .wp-posts .wp-posts-all .wp-posts-getting {
         color: #777;
         padding: 3px 5px; }
-
-.wp-config-p {
+scrapper .wp-config-p {
   margin: 8px 0; }
-  .wp-config-p input {
+  scrapper .wp-config-p input {
     outline: none;
     width: 200px;
     border: none;
     border-bottom: 1px solid #dfdfdf;
     padding: 2px 4px;
     margin: 0 6px; }
-    .wp-config-p input:focus {
+    scrapper .wp-config-p input:focus {
       border-color: #f70; }
-  .wp-config-p .wp-config-x {
+  scrapper .wp-config-p .wp-config-x {
     font-size: 18px;
     cursor: pointer;
     margin-left: 10px; }
-    .wp-config-p .wp-config-x:hover {
+    scrapper .wp-config-p .wp-config-x:hover {
       color: red; }
-  .wp-config-p .wp-config-inp-name {
+  scrapper .wp-config-p .wp-config-inp-name {
     width: 150px; }
-  .wp-config-p .wp-config-inp-url {
+  scrapper .wp-config-p .wp-config-inp-url {
     width: 300px; }
-  .wp-config-p .wp-config-inp-type {
+  scrapper .wp-config-p .wp-config-inp-type {
     width: 100px; }
-  .wp-config-p .wp-config-inp-token {
+  scrapper .wp-config-p .wp-config-inp-token {
     width: 250px; }
-
-.confirmation-dialog {
+scrapper .confirmation-dialog {
   display: none;
   position: fixed;
   top: 0;
@@ -279,58 +261,57 @@ small {
   width: 100%;
   height: 100%;
   z-index: 1000; }
-  .confirmation-dialog .dialog-wrapper {
+  scrapper .confirmation-dialog .dialog-wrapper {
     padding: 0 20px;
     display: table-cell;
     vertical-align: middle;
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.7); }
-  .confirmation-dialog .dialog {
+  scrapper .confirmation-dialog .dialog {
     position: relative;
     margin: 0 auto;
     background: white;
     box-shadow: 0 6px 40px #aaa;
     border-radius: 5px;
     overflow: hidden; }
-    .confirmation-dialog .dialog .dialog-header {
+    scrapper .confirmation-dialog .dialog .dialog-header {
       background-color: #777;
       padding: 12px 20px; }
-    .confirmation-dialog .dialog .dialog-title {
+    scrapper .confirmation-dialog .dialog .dialog-title {
       color: #fff;
       font-size: 16px;
       font-weight: bold; }
-    .confirmation-dialog .dialog .dialog-subtitle {
+    scrapper .confirmation-dialog .dialog .dialog-subtitle {
       color: #fff;
       font-size: 13px;
       padding-top: 2px; }
-    .confirmation-dialog .dialog .dialog-content {
+    scrapper .confirmation-dialog .dialog .dialog-content {
       font-size: 14px;
       padding: 30px 20px;
       word-wrap: break-word;
       max-height: 300px;
       overflow: auto; }
-      .confirmation-dialog .dialog .dialog-content.no-padding {
+      scrapper .confirmation-dialog .dialog .dialog-content.no-padding {
         padding: 0; }
-    .confirmation-dialog .dialog .dialog-footer {
+    scrapper .confirmation-dialog .dialog .dialog-footer {
       padding: 15px 20px;
       border-top: 1px solid #dfdfdf;
       text-align: right; }
-    .confirmation-dialog .dialog .dialog-x {
+    scrapper .confirmation-dialog .dialog .dialog-x {
       cursor: pointer;
       position: absolute;
       right: 20px;
       top: 10px;
       color: #fff;
       font-size: 20px; }
-    .confirmation-dialog .dialog.dialog-in {
+    scrapper .confirmation-dialog .dialog.dialog-in {
       animation-name: dialog-in;
       animation-iteration-count: 1;
       animation-timing-function: ease;
       animation-duration: 0.4s; }
-    .confirmation-dialog .dialog.error .dialog-header {
+    scrapper .confirmation-dialog .dialog.error .dialog-header {
       background-color: red; }
-
 @keyframes dialog-in {
   0% {
     opacity: 0;

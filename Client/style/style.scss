@@ -12,294 +12,143 @@ $widthFilters: 180px;
 $widthArticlesShort: 380px;
 $widthArticlePreview: 500px;
 
-* {
-  box-sizing: border-box;
-  font-size: 13px;
-}
-
 html, body, .app-wrapper {
   position: relative;
   margin: 0;
   padding: 0;
-  font-family: $fontFamily;
-  color: $colorFont1;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
-small {
-  font-size: smaller;
-}
+scrapper {
 
-.login-form {
-
-  p {
-    margin: 12px 0;
-
-    &:last-child {
-      text-align: right;
-    }
+  * {
+    box-sizing: border-box;
+    font-size: 13px;
   }
 
-  input {
-    outline: none;
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid $colorBorder;
-    padding: 2px 4px;
-
-    &:focus {
-      border-color: $color1;
-    }
-  }
-
-  .login-error {
-    font-size: 11px;
-    color: red;
-  }
-}
-
-.app-wrapper {
-  width: 1170px;
-  margin: 0 auto;
-  border-left: 1px solid $colorBorder;
-  border-right: 1px solid $colorBorder;
-}
-
-.app-title-row {
-  overflow: auto;
-}
-
-.app-title {
-  float: left;
-  padding: 0 5px;
-  height: 36px;
-  line-height: 36px;
-  background-color: #333;
-  color: $colorFontInvert1;
-  font-weight: bold;
-  text-transform: uppercase;
-
-  &.title-filters-column { width: $widthFilters; }
-  &.title-articles-column { width: $widthArticlesShort; }
-  &.title-preview-column { width: calc(100% - #{$widthFilters} - #{$widthArticlesShort}); }
-  &.title-wp-column { width: 100%; }
-}
-
-.app-row {
-  height: 500px;
-  position: relative;
-  border-bottom: 1px solid $colorBorder;
-}
-
-.app-column {
-  position: relative;
-  float: left;
-  height: 100%;
-  border-right: 1px solid $colorBorder;
-  overflow: auto;
-}
-
-.empty-column {
-  height: 100%;
-  width: 100%;
-  display: table;
-
-  div {
-    display: table-cell;
-    text-align: center;
-    color: $color2;
-    vertical-align: middle;
-  }
-}
-
-.filters-column {
-  width: $widthFilters;
-}
-
-.filters-column-group {
-  padding: 0 0 20px;
-}
-
-.filters-column-group-title {
-  text-transform: uppercase;
-  background-color: $color2;
-  color: $colorFontInvert1;
-  font-weight: bold;
-  padding: 6px 5px;
-  margin-bottom: 3px;
-}
-
-.filter-item {
-  cursor: pointer;
-  padding: 3px 5px;
-
-  &:hover {
-    background-color: $colorBgItemsHover1;
-    color: $color1;
-  }
-
-  &.selected {
-    background-color: $color1;
-    color: $colorFontInvert1;
-  }
-}
-
-.filters-config-button {
-  float: right;
-  cursor: pointer;
-  margin-top: 2px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.filters-config-p {
-  margin: 2px 0;
-
-  input[type=checkbox] {
-    vertical-align: top;
-    width: 15px;
-    height: 15px;
-    margin-right: 8px;
-    margin-top: 0px;
-  }
-}
-
-.filters-column-filter {
-  position: relative;
-  border-bottom: 1px solid $colorBorder;
-  height: 26px;
-  margin-bottom: 6px;
-
-  input {
-    border: none;
-    outline: none;
+  .app-wrapper {
+    position: relative;
     margin: 0;
-    padding: 2px 4px;
-    width: 100%;
-    height: 100%;
-    color: $colorFont2;
-  }
-}
-
-
-.articles-column {
-  width: $widthArticlesShort;
-}
-
-.article-short {
-  cursor: pointer;
-  position: relative;
-  padding: 5px;
-  border-bottom: 1px solid $colorBorder;
-  min-height: 100px;
-  overflow: auto;
-
-  .article-short-image {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 90px;
-    height: 90px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-  }
-  .article-short-data {
-    margin-left: 100px;
-  }
-  .article-short-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 2px;
-  }
-  .article-short-summary {
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  .article-short-meta {
-    font-size: 11px;
-    text-transform: uppercase;
+    padding: 0;
+    font-family: $fontFamily;
+    color: $colorFont1;
   }
 
-  &:hover {
-    background-color: $colorBgItemsHover1;
-
-    .article-short-title {
-      color: $color1;
-    }
+  p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+  
+  small {
+    font-size: smaller;
   }
 
-  &.selected {
-    background-color: $color1;
-    color: $colorFontInvert1;
-
-    .article-short-title {
-      color: $colorFontInvert1;
-    }
-  }
-}
-
-.preview-column {
-  padding: 10px;
-  //width: $widthArticlePreview;
-  width: calc(100% - #{$widthFilters} - #{$widthArticlesShort});
-  border-right: none;
-
-  .m-bot {
-    margin-bottom: 15px;
-  }
-
-  .preview-column-meta {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: $colorFont2;
-    border-bottom: 1px solid $colorBorder;
-    padding-bottom: 10px;
-
-    a, a:visited {
-      text-decortion: underline;
-      color: $colorFont2;
-    }
-    a:hover {
-      color: $color1;
-    }
-  }
-
-  .preview-column-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .preview-column-content {
-    text-align: justify;
-
-    img {
-      max-width: 100%;
-    }
+  .login-form {
 
     p {
-      margin: 10px 0;
+      margin: 12px 0;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+
+    input {
+      outline: none;
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $colorBorder;
+      padding: 2px 4px;
+
+      &:focus {
+        border-color: $color1;
+      }
+    }
+
+    .login-error {
+      font-size: 11px;
+      color: red;
     }
   }
-}
 
-.wp-column {
-  float: none;
-  border-right: none;
-
-  .wp-items {
-    width: $widthFilters;
-    float: left;
-    height: 100%;
+  .app-wrapper {
+    width: 1170px;
+    margin: 0 auto;
+    border-left: 1px solid $colorBorder;
     border-right: 1px solid $colorBorder;
   }
 
-  .wp-item {
+  .app-title-row {
+    overflow: auto;
+  }
+
+  .app-title {
+    float: left;
+    padding: 0 5px;
+    height: 36px;
+    line-height: 36px;
+    background-color: #333;
+    color: $colorFontInvert1;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &.title-filters-column {
+      width: $widthFilters;
+    }
+    &.title-articles-column {
+      width: $widthArticlesShort;
+    }
+    &.title-preview-column {
+      width: calc(100% - #{$widthFilters} - #{$widthArticlesShort});
+    }
+    &.title-wp-column {
+      width: 100%;
+    }
+  }
+
+  .app-row {
+    height: 500px;
+    position: relative;
+    border-bottom: 1px solid $colorBorder;
+  }
+
+  .app-column {
+    position: relative;
+    float: left;
+    height: 100%;
+    border-right: 1px solid $colorBorder;
+    overflow: auto;
+  }
+
+  .empty-column {
+    height: 100%;
+    width: 100%;
+    display: table;
+
+    div {
+      display: table-cell;
+      text-align: center;
+      color: $color2;
+      vertical-align: middle;
+    }
+  }
+
+  .filters-column {
+    width: $widthFilters;
+  }
+
+  .filters-column-group {
+    padding: 0 0 20px;
+  }
+
+  .filters-column-group-title {
+    text-transform: uppercase;
+    background-color: $color2;
+    color: $colorFontInvert1;
+    font-weight: bold;
+    padding: 6px 5px;
+    margin-bottom: 3px;
+  }
+
+  .filter-item {
     cursor: pointer;
     padding: 3px 5px;
 
@@ -314,173 +163,350 @@ small {
     }
   }
 
-  .wp-posts {
-    width: calc(100% - #{$widthFilters});
-    float: left;
-    height: 100%;
-
-    .wp-posts-toolbar {
-      padding: 0 5px;
-      height: 30px;
-      line-height: 30px;
-      border-bottom: 1px solid $colorBorder;
-    }
-
-    .wp-posts-all {
-      height: calc(100% - 30px);
-      overflow: auto;
-
-      .wp-posts-post {
-        padding: 3px 5px;
-        border-bottom: 1px dashed $colorBorder;
-
-        a, a:visited, a:active {
-          color: $color2;
-          text-decoration: none;
-        }
-        a:hover {
-          color: $color1;
-          text-decoration: underline;
-        }
-      }
-
-      .wp-posts-getting {
-        color: $color2;
-        padding: 3px 5px;
-      }
-    }
-  }
-}
-
-.wp-config-p {
-  margin: 8px 0;
-
-  input {
-    outline: none;
-    width: 200px;
-    border: none;
-    border-bottom: 1px solid $colorBorder;
-    padding: 2px 4px;
-    margin: 0 6px;
-
-    &:focus {
-      border-color: $color1;
-    }
-  }
-
-  .wp-config-x {
-    font-size: 18px;
+  .filters-config-button {
+    float: right;
     cursor: pointer;
-    margin-left: 10px;
+    margin-top: 2px;
 
     &:hover {
-      color: red;
+      text-decoration: underline;
     }
   }
 
-  .wp-config-inp-name { width: 150px; }
-  .wp-config-inp-url { width: 300px; }
-  .wp-config-inp-type { width: 100px; }
-  .wp-config-inp-token { width: 250px; }
-}
+  .filters-config-p {
+    margin: 2px 0;
 
-.confirmation-dialog {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-
-  .dialog-wrapper {
-    padding: 0 20px;
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.7);
-    //background: white;
+    input[type=checkbox] {
+      vertical-align: top;
+      width: 15px;
+      height: 15px;
+      margin-right: 8px;
+      margin-top: 0px;
+    }
   }
 
-  .dialog {
+  .filters-column-filter {
     position: relative;
-    margin: 0 auto;
-    background: white;
-    box-shadow: 0 6px 40px #aaa;
-    border-radius: 5px;
-    overflow: hidden;
+    border-bottom: 1px solid $colorBorder;
+    height: 26px;
+    margin-bottom: 6px;
 
-    .dialog-header {
-      background-color: $color2;
-      padding: 12px 20px;
+    input {
+      border: none;
+      outline: none;
+      margin: 0;
+      padding: 2px 4px;
+      width: 100%;
+      height: 100%;
+      color: $colorFont2;
+    }
+  }
+
+  .articles-column {
+    width: $widthArticlesShort;
+  }
+
+  .article-short {
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+    border-bottom: 1px solid $colorBorder;
+    min-height: 100px;
+    overflow: auto;
+
+    .article-short-image {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 90px;
+      height: 90px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+    .article-short-data {
+      margin-left: 100px;
+    }
+    .article-short-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 2px;
+    }
+    .article-short-summary {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .article-short-meta {
+      font-size: 11px;
+      text-transform: uppercase;
     }
 
-    .dialog-title {
+    &:hover {
+      background-color: $colorBgItemsHover1;
+
+      .article-short-title {
+        color: $color1;
+      }
+    }
+
+    &.selected {
+      background-color: $color1;
       color: $colorFontInvert1;
-      font-size: 16px;
+
+      .article-short-title {
+        color: $colorFontInvert1;
+      }
+    }
+  }
+
+  .preview-column {
+    padding: 10px;
+    //width: $widthArticlePreview;
+    width: calc(100% - #{$widthFilters} - #{$widthArticlesShort});
+    border-right: none;
+
+    .m-bot {
+      margin-bottom: 15px;
+    }
+
+    .preview-column-meta {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: $colorFont2;
+      border-bottom: 1px solid $colorBorder;
+      padding-bottom: 10px;
+
+      a, a:visited {
+        text-decortion: underline;
+        color: $colorFont2;
+      }
+      a:hover {
+        color: $color1;
+      }
+    }
+
+    .preview-column-title {
+      font-size: 18px;
       font-weight: bold;
     }
 
-    .dialog-subtitle {
-      color: $colorFontInvert1;
-      font-size: 13px;
-      padding-top: 2px;
-    }
+    .preview-column-content {
+      text-align: justify;
 
-    .dialog-content {
-      font-size: 14px;
-      padding: 30px 20px;
-      word-wrap: break-word;
+      img {
+        max-width: 100%;
+      }
 
-      // TODO makni ovo na nesto pametnije, procentualno...
-      max-height: 300px;
-      overflow: auto;
-
-      &.no-padding{
-        padding: 0;
+      p {
+        margin: 10px 0;
       }
     }
+  }
 
-    .dialog-footer {
-      padding: 15px 20px;
-      border-top: 1px solid #dfdfdf;
-      text-align: right;
+  .wp-column {
+    float: none;
+    border-right: none;
+
+    .wp-items {
+      width: $widthFilters;
+      float: left;
+      height: 100%;
+      border-right: 1px solid $colorBorder;
     }
 
-    .dialog-x {
+    .wp-item {
       cursor: pointer;
-      position: absolute;
-      right: 20px;
-      top: 10px;
-      color: $colorFontInvert1;
-      font-size: 20px;
+      padding: 3px 5px;
+
+      &:hover {
+        background-color: $colorBgItemsHover1;
+        color: $color1;
+      }
+
+      &.selected {
+        background-color: $color1;
+        color: $colorFontInvert1;
+      }
     }
 
-    &.dialog-in {
-      animation-name: dialog-in;
-      animation-iteration-count: 1;
-      animation-timing-function: ease;
-      animation-duration: 0.4s;
-    }
+    .wp-posts {
+      width: calc(100% - #{$widthFilters});
+      float: left;
+      height: 100%;
 
-    &.error {
-      .dialog-header {
-        background-color: red;
+      .wp-posts-toolbar {
+        padding: 0 5px;
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid $colorBorder;
+      }
+
+      .wp-posts-all {
+        height: calc(100% - 30px);
+        overflow: auto;
+
+        .wp-posts-post {
+          padding: 3px 5px;
+          border-bottom: 1px dashed $colorBorder;
+
+          a, a:visited, a:active {
+            color: $color2;
+            text-decoration: none;
+          }
+          a:hover {
+            color: $color1;
+            text-decoration: underline;
+          }
+        }
+
+        .wp-posts-getting {
+          color: $color2;
+          padding: 3px 5px;
+        }
       }
     }
   }
-}
 
-@keyframes dialog-in {
-  0% {
-    opacity: 0;
-    margin-top: -30px;
+  .wp-config-p {
+    margin: 8px 0;
+
+    input {
+      outline: none;
+      width: 200px;
+      border: none;
+      border-bottom: 1px solid $colorBorder;
+      padding: 2px 4px;
+      margin: 0 6px;
+
+      &:focus {
+        border-color: $color1;
+      }
+    }
+
+    .wp-config-x {
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 10px;
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    .wp-config-inp-name {
+      width: 150px;
+    }
+    .wp-config-inp-url {
+      width: 300px;
+    }
+    .wp-config-inp-type {
+      width: 100px;
+    }
+    .wp-config-inp-token {
+      width: 250px;
+    }
   }
-  100% {
-    opacity: 1;
-    margin-top: 0;
+
+  .confirmation-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+
+    .dialog-wrapper {
+      padding: 0 20px;
+      display: table-cell;
+      vertical-align: middle;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      //background: white;
+    }
+
+    .dialog {
+      position: relative;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 6px 40px #aaa;
+      border-radius: 5px;
+      overflow: hidden;
+
+      .dialog-header {
+        background-color: $color2;
+        padding: 12px 20px;
+      }
+
+      .dialog-title {
+        color: $colorFontInvert1;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .dialog-subtitle {
+        color: $colorFontInvert1;
+        font-size: 13px;
+        padding-top: 2px;
+      }
+
+      .dialog-content {
+        font-size: 14px;
+        padding: 30px 20px;
+        word-wrap: break-word;
+
+        // TODO makni ovo na nesto pametnije, procentualno...
+        max-height: 300px;
+        overflow: auto;
+
+        &.no-padding {
+          padding: 0;
+        }
+      }
+
+      .dialog-footer {
+        padding: 15px 20px;
+        border-top: 1px solid #dfdfdf;
+        text-align: right;
+      }
+
+      .dialog-x {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        color: $colorFontInvert1;
+        font-size: 20px;
+      }
+
+      &.dialog-in {
+        animation-name: dialog-in;
+        animation-iteration-count: 1;
+        animation-timing-function: ease;
+        animation-duration: 0.4s;
+      }
+
+      &.error {
+        .dialog-header {
+          background-color: red;
+        }
+      }
+    }
   }
+
+  @keyframes dialog-in {
+    0% {
+      opacity: 0;
+      margin-top: -30px;
+    }
+    100% {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
+
 }
 
 

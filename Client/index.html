@@ -16,135 +16,156 @@
   <script src="scripts/lib/angular-animate.min.js"></script>
   <script src="scripts/lib/restangular.min.js"></script>
 </head>
-<body ng-app="app">
-<div class="app-wrapper">
+<body ng-app="scrapper">
 
-  <div class="app-title-row">
-    <div class="app-title title-filters-column">filters</div>
-    <div class="app-title title-articles-column">articles</div>
-    <div class="app-title title-preview-column">article preview</div>
-  </div>
+<scrapper>
+  <div class="app-wrapper">
 
-  <div class="app-row">
-
-    <div class="app-column filters-column" sn-filters>
-      <div class="filters-column-group">
-        <div class="filters-column-group-title">Publishers</div>
-        <div class="filter-item" ng-repeat="filter in snFilters.publishers" ng-class="{ selected: filter.selected }"
-             ng-click="snFilters.changePublisher(filter, $event)">
-          <span ng-bind=":: filter.name"></span> (<small ng-bind=":: filter.hits"></small>)
-        </div>
-      </div>
-      <div class="filters-column-group">
-        <div class="filters-column-group-title">Categories <small class="filters-config-button" ng-click="snFilters.openConfigDialog()">config</small></div>
-        <div class="filters-column-filter"><input type="text" placeholder="Filter..." ng-model="snFilters.filterCategories"/></div>
-        <div class="filter-item" ng-repeat="filter in snFilters.categories | filter:snFilters.filterCategories" ng-class="{ selected: filter.selected }"
-             ng-click="snFilters.changeCategory(filter, $event)" ng-hide="snFilters.isCategoryDisabled(filter)">
-          <span ng-bind=":: filter.name"></span> (<small ng-bind="snFilters.getHitsForCategory(filter)"></small>)
-        </div>
-      </div>
+    <div class="app-title-row">
+      <div class="app-title title-filters-column">filters</div>
+      <div class="app-title title-articles-column">articles</div>
+      <div class="app-title title-preview-column">article preview</div>
     </div>
 
-    <div class="app-column articles-column" sn-articles>
-      <div class="article-short" ng-repeat="article in snArticles.articles" ng-click="snArticles.selectArticle(article)"
-           ng-class="{ selected: article.selected }">
-        <div class="article-short-image"
-             style="background-image: url({{:: article.image_rss_original_url || article.image_original_url}})"></div>
-        <div class="article-short-data">
-          <p class="article-short-title" ng-bind=":: article.title"></p>
+    <div class="app-row">
 
-          <p class="article-short-summary" ng-bind=":: article.summary"></p>
-
-          <p class="article-short-meta"><b ng-bind=":: article.publisher"></b> | <b ng-bind=":: article.category"></b> |
-            <span sn-timeago="{{::snArticles.timestampToISO(article.timestamp)}}" data-refresh></span></p>
-        </div>
-      </div>
-      <div class="empty-column" ng-hide="snArticles.articles.length > 0">
-        <div>No articles for selected filters</div>
-      </div>
-    </div>
-
-    <div class="app-column preview-column" sn-preview>
-      <div class="preview-column-wrap" ng-hide="snPreview.article === null">
-        <div class="preview-column-meta m-bot">
-          <a href="{{snPreview.article.original_url}}" target="_blank"><b>source</b></a> | <b
-          ng-bind="snPreview.article.publisher"></b> | <b ng-bind="snPreview.article.category"></b> | <b
-          ng-bind="snPreview.timestampToReadable(snPreview.article.timestamp)"></b>
-        </div>
-        <div class="preview-column-title m-bot" ng-bind="snPreview.article.title"></div>
-        <div class="preview-column-content m-bot" id="_content">
-          <p><b ng-bind="snPreview.article.summary"></b></p>
-
-          <p><img ng-src="{{snPreview.article.image_original_url || snPreview.article.image_rss_original_url || ''}}"
-                  alt=""/></p>
-
-          <p ng-bind-html="snPreview.article.contentHtml"></p>
-        </div>
-      </div>
-      <div class="empty-column" ng-hide="snPreview.article !== null">
-        <div>Select an article to see preview</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="app-title-row">
-    <div class="app-title title-wp-column">wordpress tools</div>
-  </div>
-
-  <div class="app-row">
-
-    <div class="app-column wp-column" sn-wp-post>
-
-      <div class="wp-items">
-        <div class="wp-item" ng-repeat="wp in snWpPost.wps"
-             ng-click="snWpPost.selectWP(wp)"
-             ng-class="{ selected: (snWpPost.selectedWP === wp) }">
-          <span ng-bind="wp.wp_name"></span>
-        </div>
-        <button ng-click="snWpPost.openConfigDialog()">config</button>
-      </div>
-
-      <div class="wp-posts">
-        <div class="wp-posts-toolbar">
-          <button ng-click="snWpPost.post()"
-                  ng-disabled="snWpPost.article === null || snWpPost.selectedWP === null || snWpPost.selectedWP.postData.status < 3">post</button>
-          <span ng-bind="snWpPost.displayPostingStatus()"></span>
-        </div>
-        <div class="wp-posts-all">
-          <div class="wp-posts-post" ng-repeat="post in snWpPost.selectedWP.postData.posts">
-            <p><small>{{:: post.date.replace('T', ' ')}} ({{:: post.id}})</small></p>
-            <p ng-bind=":: post.title.rendered"></p>
-            <p><a ng-href="{{:: post.link}}" target="_blank" ng-bind=":: post.link"></a></p>
+      <div class="app-column filters-column" sn-filters>
+        <div class="filters-column-group">
+          <div class="filters-column-group-title">Publishers</div>
+          <div class="filter-item" ng-repeat="filter in snFilters.publishers" ng-class="{ selected: filter.selected }"
+               ng-click="snFilters.changePublisher(filter, $event)">
+            <span ng-bind=":: filter.name"></span> (
+            <small ng-bind=":: filter.hits"></small>
+            )
           </div>
-          <div class="empty-column" ng-show="!snWpPost.selectedWP">
-            <div>Select WP to see previous posts</div>
+        </div>
+        <div class="filters-column-group">
+          <div class="filters-column-group-title">Categories
+            <small class="filters-config-button" ng-click="snFilters.openConfigDialog()">config</small>
           </div>
-          <div class="wp-posts-getting" ng-show="snWpPost.selectedWP && !snWpPost.selectedWP.postData.posts">Getting WP data...</div>
+          <div class="filters-column-filter"><input type="text" placeholder="Filter..."
+                                                    ng-model="snFilters.filterCategories"/></div>
+          <div class="filter-item" ng-repeat="filter in snFilters.categories | filter:snFilters.filterCategories"
+               ng-class="{ selected: filter.selected }"
+               ng-click="snFilters.changeCategory(filter, $event)" ng-hide="snFilters.isCategoryDisabled(filter)">
+            <span ng-bind=":: filter.name"></span> (
+            <small ng-bind="snFilters.getHitsForCategory(filter)"></small>
+            )
+          </div>
+        </div>
+      </div>
+
+      <div class="app-column articles-column" sn-articles>
+        <div class="article-short" ng-repeat="article in snArticles.articles"
+             ng-click="snArticles.selectArticle(article)"
+             ng-class="{ selected: article.selected }">
+          <div class="article-short-image"
+               style="background-image: url({{:: article.image_rss_original_url || article.image_original_url}})"></div>
+          <div class="article-short-data">
+            <p class="article-short-title" ng-bind=":: article.title"></p>
+
+            <p class="article-short-summary" ng-bind=":: article.summary"></p>
+
+            <p class="article-short-meta"><b ng-bind=":: article.publisher"></b> | <b ng-bind=":: article.category"></b>
+              |
+              <span sn-timeago="{{::snArticles.timestampToISO(article.timestamp)}}" data-refresh></span></p>
+          </div>
+        </div>
+        <div class="empty-column" ng-hide="snArticles.articles.length > 0">
+          <div>No articles for selected filters</div>
+        </div>
+      </div>
+
+      <div class="app-column preview-column" sn-preview>
+        <div class="preview-column-wrap" ng-hide="snPreview.article === null">
+          <div class="preview-column-meta m-bot">
+            <a href="{{snPreview.article.original_url}}" target="_blank"><b>source</b></a> | <b
+            ng-bind="snPreview.article.publisher"></b> | <b ng-bind="snPreview.article.category"></b> | <b
+            ng-bind="snPreview.timestampToReadable(snPreview.article.timestamp)"></b>
+          </div>
+          <div class="preview-column-title m-bot" ng-bind="snPreview.article.title"></div>
+          <div class="preview-column-content m-bot" id="_content">
+            <p><b ng-bind="snPreview.article.summary"></b></p>
+
+            <p><img ng-src="{{snPreview.article.image_original_url || snPreview.article.image_rss_original_url || ''}}"
+                    alt=""/></p>
+
+            <p ng-bind-html="snPreview.article.contentHtml"></p>
+          </div>
+        </div>
+        <div class="empty-column" ng-hide="snPreview.article !== null">
+          <div>Select an article to see preview</div>
         </div>
       </div>
 
     </div>
 
+    <div class="app-title-row">
+      <div class="app-title title-wp-column">wordpress tools</div>
+    </div>
+
+    <div class="app-row">
+
+      <div class="app-column wp-column" sn-wp-post>
+
+        <div class="wp-items">
+          <div class="wp-item" ng-repeat="wp in snWpPost.wps"
+               ng-click="snWpPost.selectWP(wp)"
+               ng-class="{ selected: (snWpPost.selectedWP === wp) }">
+            <span ng-bind="wp.wp_name"></span>
+          </div>
+          <button ng-click="snWpPost.openConfigDialog()">config</button>
+        </div>
+
+        <div class="wp-posts">
+          <div class="wp-posts-toolbar">
+            <button ng-click="snWpPost.post()"
+                    ng-disabled="snWpPost.article === null || snWpPost.selectedWP === null || snWpPost.selectedWP.postData.status < 3">
+              post
+            </button>
+            <span ng-bind="snWpPost.displayPostingStatus()"></span>
+          </div>
+          <div class="wp-posts-all">
+            <div class="wp-posts-post" ng-repeat="post in snWpPost.selectedWP.postData.posts">
+              <p>
+                <small>{{:: post.date.replace('T', ' ')}} ({{:: post.id}})</small>
+              </p>
+              <p ng-bind=":: post.title.rendered"></p>
+
+              <p><a ng-href="{{:: post.link}}" target="_blank" ng-bind=":: post.link"></a></p>
+            </div>
+            <div class="empty-column" ng-show="!snWpPost.selectedWP">
+              <div>Select WP to see previous posts</div>
+            </div>
+            <div class="wp-posts-getting" ng-show="snWpPost.selectedWP && !snWpPost.selectedWP.postData.posts">Getting
+              WP data...
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="confirmationDialogs"></div>
+
+    <script src="scripts/app/config.js"></script>
+    <script src="scripts/app/dbq.js"></script>
+    <script src="scripts/app/app.js"></script>
+    <script src="scripts/app/server/server-service.js"></script>
+    <script src="scripts/app/events/log-service.js"></script>
+    <script src="scripts/app/events/events-service.js"></script>
+    <script src="scripts/app/filters/filters-directive.js"></script>
+    <script src="scripts/app/article/articles-directive.js"></script>
+    <script src="scripts/app/article/article-preview-directive.js"></script>
+    <script src="scripts/app/article/timeago-directive.js"></script>
+    <script src="scripts/app/wordpress/wordpress-directive.js"></script>
+    <script src="scripts/app/dialog/confirmation-dialog-service.js"></script>
+    <script src="scripts/app/auth/auth-service.js"></script>
+    <script src="scripts/app/auth/auth-directive.js"></script>
+
   </div>
+</scrapper>
 
-  <div id="confirmationDialogs"></div>
-
-  <script src="scripts/app/config.js"></script>
-  <script src="scripts/app/dbq.js"></script>
-  <script src="scripts/app/app.js"></script>
-  <script src="scripts/app/server/server-service.js"></script>
-  <script src="scripts/app/events/log-service.js"></script>
-  <script src="scripts/app/events/events-service.js"></script>
-  <script src="scripts/app/filters/filters-directive.js"></script>
-  <script src="scripts/app/article/articles-directive.js"></script>
-  <script src="scripts/app/article/article-preview-directive.js"></script>
-  <script src="scripts/app/article/timeago-directive.js"></script>
-  <script src="scripts/app/wordpress/wordpress-directive.js"></script>
-  <script src="scripts/app/dialog/confirmation-dialog-service.js"></script>
-  <script src="scripts/app/auth/auth-service.js"></script>
-  <script src="scripts/app/auth/auth-directive.js"></script>
-
-</div>
 </body>
 </html>

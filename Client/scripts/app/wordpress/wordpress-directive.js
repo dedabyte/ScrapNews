@@ -5,7 +5,7 @@
   var componentName = 'snWpPost';
 
   angular
-    .module('app')
+    .module('scrapper')
     .directive(componentName, function(Server, EventsService, ConfirmationDialog, LogService){
       //var $content = $('#_content');
 

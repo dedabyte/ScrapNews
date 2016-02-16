@@ -5,7 +5,7 @@
   var componentName = 'snAuth';
 
   angular
-    .module('app')
+    .module('scrapper')
     .directive(componentName, function(){
       return {
         controllerAs: componentName,

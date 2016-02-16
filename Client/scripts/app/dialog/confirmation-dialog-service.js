@@ -8,7 +8,7 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('scrapper')
     .service('TranslateService', function(){
       this.translate = function(x){
         return x;
@@ -46,7 +46,7 @@
    */
 
   angular
-    .module('app')
+    .module('scrapper')
     .factory('ConfirmationDialog', ConfirmationDialog);
 
   // dialog template

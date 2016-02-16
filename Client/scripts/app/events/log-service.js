@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('scrapper')
     .factory('LogService', LogService);
 
   function LogService(){

@@ -2,7 +2,7 @@
 
   'use strict';
 
-  var app = angular.module('app', ['restangular']);
+  var app = angular.module('scrapper', ['restangular']);
 
   app.config(function(RestangularProvider){
 

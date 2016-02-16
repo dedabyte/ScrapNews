@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('scrapper')
     .directive('snTimeago', snTimeago);
 
   /**

@@ -5,7 +5,7 @@
   var componentName = 'snFilters';
 
   angular
-    .module('app')
+    .module('scrapper')
     .directive(componentName, function(Server, EventsService, LogService, ConfirmationDialog){
       return {
         controllerAs: componentName,

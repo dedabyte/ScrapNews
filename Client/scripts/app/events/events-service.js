@@ -3,13 +3,13 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('scrapper')
     .constant('EVENTS', {
 
     });
 
   angular
-    .module('app')
+    .module('scrapper')
     .factory('EventsService', EventsService);
 
   function EventsService($rootScope, LogService){
