@@ -168,6 +168,13 @@ namespace Server.Controllers
             return File(data, "image/jpeg"); ;
         }
 
+        public string GetWebpage(string url)
+        {
+            var webClient = new WebClient();
+            webClient.Encoding = System.Text.Encoding.UTF8;
+            return webClient.DownloadString(url);
+        }
+
         //public JsonNetResult Login(string user, string pass)
         //{
         //    var userId = Auth.CheckCredentials(user, pass);
