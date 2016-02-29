@@ -98,25 +98,32 @@ namespace Server.Models
 
         public static bool Login(HttpResponseBase response, int userId, int minutes = 60)
         {
-            var newGuid = Guid.NewGuid().ToString();
             try
             {
-                var rowsAffected = 0;
-                var sql = "update users set guid = '" + newGuid + "' where id = " + userId;
-                using (var connection = Db.getConnection("users"))
+                string guid;
+                var sqlGetGuid = "select guid from users where id = " + userId;
+                using (var connection = Db.getConnection("users", true))
                 {
                     connection.Open();
-                    using (var cmd = new SQLiteCommand(sql, connection))
+                    using (var cmd = new SQLiteCommand(sqlGetGuid, connection))
                     {
-                        rowsAffected = cmd.ExecuteNonQuery();
+                        guid = cmd.ExecuteScalar().ToString();
                     }
                 }
-                if(rowsAffected < 1)
+                if (string.IsNullOrEmpty(guid))
                 {
-                    return false;
+                    guid = Guid.NewGuid().ToString();
+                    var sqlSetGuid = "update users set guid = '" + guid + "' where id = " + userId;
+                    using (var connection = Db.getConnection("users"))
+                    {
+                        connection.Open();
+                        using (var cmd = new SQLiteCommand(sqlSetGuid, connection))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                 }
-                //SetAuthCooke(response, userId, newGuid, minutes);
-                SetAuthHeader(response, userId, newGuid, minutes);
+                SetAuthHeader(response, userId, guid, minutes);
                 return true;
             }
             catch (Exception)
@@ -124,6 +131,6 @@ namespace Server.Models
                 return false;
             }
         }
-        
+
     }
 }
